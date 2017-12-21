@@ -24,7 +24,6 @@ public class SceneOneManager : MonoBehaviour {
 	void Start () {
         VildracSpriteRenderer = Vildrac.GetComponent<SpriteRenderer>();
         VildracSpriteRenderer.material.color = new Color(1.0f, 1.0f, 1.0f, Alpha);
-        VildracSpriteRenderer.flipX = true;
         CouloirAnimator = Couloir.GetComponent<Animator>();
         CouloirAnimator.SetBool("isOpen", true);
     }
@@ -38,14 +37,14 @@ public class SceneOneManager : MonoBehaviour {
     {
         if (CouloirAnimator.GetCurrentAnimatorStateInfo(0).IsName("PorteOuverte"))
         {
-            Player_controller.startMoving = true;
+            Player_controller.startMovingLeft = true;
             if (Alpha < 1)
             {
                 Alpha += 0.05f;
             }
             if (Vildrac.transform.position.x <= DummyStopPosition.transform.position.x)
             {
-                Player_controller.startMoving = false;
+                Player_controller.startMovingLeft = false;
                 Player_controller.isIddle = true;
                 Invoke("SetChoiceActive", 0.5f);
             }
