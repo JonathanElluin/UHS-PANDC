@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RoutineScript : MonoBehaviour {
+public class SceneOneManager : MonoBehaviour {
 
 
     private SpriteRenderer VildracSpriteRenderer;
@@ -16,6 +16,8 @@ public class RoutineScript : MonoBehaviour {
     public GameObject Couloir;
 
     public GameObject Cursor;
+    public GameObject VildracAlcolo;
+    public GameObject VildracColere;
     
 
 	// Use this for initialization
@@ -45,9 +47,17 @@ public class RoutineScript : MonoBehaviour {
             {
                 Player_controller.startMoving = false;
                 Player_controller.isIddle = true;
-                Cursor.SetActive(true);
+                Invoke("SetChoiceActive", 0.5f);
             }
             Vildrac.GetComponent<SpriteRenderer>().material.color = new Color(1.0f, 1.0f, 1.0f, Alpha);
         }
+    }
+
+    private void SetChoiceActive()
+    {
+        Cursor.SetActive(true);
+        VildracColere.SetActive(true);
+        VildracAlcolo.SetActive(true);
+        Vildrac.SetActive(false);
     }
 }
