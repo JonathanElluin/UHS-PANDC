@@ -11,6 +11,14 @@ public class ClickManager : MonoBehaviour
     public Sprite sprite1; //sprite qui change en fonction du choix 
     private SpriteRenderer spriteRenderer1;
 
+    public GameObject VildracSprite;
+    private Animator VildracAnimator;
+
+    private void Start()
+    {
+        VildracAnimator = VildracSprite.GetComponent<Animator>();
+    }
+
     void OnTriggerEnter2D(Collider2D In)
     {
 
@@ -18,8 +26,9 @@ public class ClickManager : MonoBehaviour
         {
             spriteRenderer1 = In.gameObject.GetComponent<SpriteRenderer>(); // recup le sprite
             spriteRenderer1.sprite = sprite1; //Change le sprite du curseur 
-
         }
+
+        VildracAnimator.SetBool("isHighlight", true);
 
     }
 
@@ -30,9 +39,9 @@ public class ClickManager : MonoBehaviour
         {
             spriteRenderer0 = Out.gameObject.GetComponent<SpriteRenderer>(); // recup le sprite
             spriteRenderer0.sprite = sprite0; //Change le sprite du curseur 
-
-
         }
+
+        VildracAnimator.SetBool("isHighlight", false);
 
     }
 

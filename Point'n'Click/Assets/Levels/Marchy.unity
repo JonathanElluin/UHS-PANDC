@@ -228,6 +228,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sprite0: {fileID: 21300000, guid: 9aa837fabe6de634484c66547e018985, type: 3}
   sprite1: {fileID: 21300004, guid: 9aa837fabe6de634484c66547e018985, type: 3}
+  VildracSprite: {fileID: 1501726896}
 --- !u!50 &22076701
 Rigidbody2D:
   serializedVersion: 4
@@ -364,6 +365,7 @@ GameObject:
   m_Component:
   - component: {fileID: 407620771}
   - component: {fileID: 407620772}
+  - component: {fileID: 407620773}
   m_Layer: 0
   m_Name: VildracColerique
   m_TagString: Untagged
@@ -428,6 +430,23 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
+--- !u!95 &407620773
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 407620770}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: aba6a7f531d290f4aa145be723f37500, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
 --- !u!1 &438424144
 GameObject:
   m_ObjectHideFlags: 0
@@ -589,6 +608,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sprite0: {fileID: 21300000, guid: 9aa837fabe6de634484c66547e018985, type: 3}
   sprite1: {fileID: 21300006, guid: 9aa837fabe6de634484c66547e018985, type: 3}
+  VildracSprite: {fileID: 407620770}
 --- !u!61 &928784983
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -812,6 +832,11 @@ Prefab:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 114918889483792376, guid: b7aad03981d227142b342e4e2772eac3,
+        type: 2}
+      propertyPath: Speed
+      value: 10
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: b7aad03981d227142b342e4e2772eac3, type: 2}
   m_IsPrefabParent: 0
@@ -898,6 +923,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1501726897}
   - component: {fileID: 1501726898}
+  - component: {fileID: 1501726899}
   m_Layer: 0
   m_Name: VildracAlcolique
   m_TagString: Untagged
@@ -962,6 +988,23 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
+--- !u!95 &1501726899
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1501726896}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 4566e9eea52c29d429c857564690d7ad, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
 --- !u!1 &1505957635
 GameObject:
   m_ObjectHideFlags: 0
