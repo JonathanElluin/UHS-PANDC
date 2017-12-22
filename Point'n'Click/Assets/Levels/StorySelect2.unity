@@ -1404,11 +1404,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Vildrac: {fileID: 1616960232}
-<<<<<<< HEAD
   Background: {fileID: 0}
-=======
-  Couloir: {fileID: 1505957635}
->>>>>>> 966dabaf0299bd93b1f92171b7d4dd03674fe7f5
 --- !u!1 &1616960232
 GameObject:
   m_ObjectHideFlags: 0
@@ -1495,11 +1491,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1616960232}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-<<<<<<< HEAD
   m_LocalPosition: {x: 10.86, y: -1.18, z: 1}
-=======
-  m_LocalPosition: {x: 5.11, y: -1.18, z: 0}
->>>>>>> 966dabaf0299bd93b1f92171b7d4dd03674fe7f5
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -1600,13 +1592,8 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1848162193}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-<<<<<<< HEAD
   m_LocalPosition: {x: 459, y: 208.5, z: 0}
   m_LocalScale: {x: 0.478125, y: 0.478125, z: 0.478125}
-=======
-  m_LocalPosition: {x: 574, y: 265, z: 0}
-  m_LocalScale: {x: 0.59791666, y: 0.59791666, z: 0.59791666}
->>>>>>> 966dabaf0299bd93b1f92171b7d4dd03674fe7f5
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 3
