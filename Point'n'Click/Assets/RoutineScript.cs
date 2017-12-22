@@ -14,7 +14,6 @@ public class RoutineScript : MonoBehaviour {
 	void Start () {
         VildracSpriteRenderer = Vildrac.GetComponent<SpriteRenderer>();
         VildracSpriteRenderer.flipX = true;
-        Player_controller.startMoving = true;
         CouloirAnimator = Background.GetComponent<Animator>();
 	}
 	

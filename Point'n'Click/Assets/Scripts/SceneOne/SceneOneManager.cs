@@ -21,7 +21,7 @@ public class SceneOneManager : MonoBehaviour {
     {
         VildracSpriteRenderer = Vildrac.GetComponent<SpriteRenderer>();
         CouloirAnimator = Background.GetComponent<Animator>();
-        VildracSpriteRenderer.material.color = new Color(1.0f, 1.0f, 1.0f, 0);
+        VildracSpriteRenderer.material.color = new Color(1.0f, 1.0f, 1.0f, Alpha);
         CouloirAnimator.SetBool("isOpen", true);
     }
 
@@ -34,6 +34,7 @@ public class SceneOneManager : MonoBehaviour {
     {
         if (CouloirAnimator.GetCurrentAnimatorStateInfo(0).IsName("PorteOuverte"))
         {
+           
             Player_controller.startMovingLeft = true;
             if (Alpha < 1)
             {
