@@ -1,8 +1,5 @@
-﻿
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-public class Player_controller : MonoBehaviour
+﻿using UnityEngine;
+public class PlayerControllerScene2 : MonoBehaviour
 {
     private Animator playerAnimator;
     private SpriteRenderer spriteRenderer;
@@ -29,7 +26,7 @@ public class Player_controller : MonoBehaviour
         {
             if (startMovingLeft)
             {
-                playerAnimator.SetInteger("Speed", 1);
+                playerAnimator.SetInteger("Speed", -1);
                 transform.Translate(Vector2.left * Speed * Time.deltaTime);
             }
             else
