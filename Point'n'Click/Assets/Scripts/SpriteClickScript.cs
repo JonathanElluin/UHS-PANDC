@@ -1,35 +1,13 @@
 ﻿using UnityEngine;
 using Assets.Scripts;
 
-public class SpriteClickScript : MonoBehaviour
-{
+public class SpriteClickScript : MonoBehaviour {
 
     public GameObject sprite;
-    public Collider2D collider1;
-    public GameObject collision;
-    private bool curseurPresent = false;
 
-    private void Update()
+    public void OnMouseDown()
     {
-        if (Input.GetKeyDown(KeyCode.Space) && curseurPresent == true)  //Appui sur Espace
-        {
-            SetCollider();
-        }
-    }
-
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        curseurPresent = true;
-        this.collision = collision.gameObject;
-    }
-
-    private void OnTriggerExit2D(Collider2D collision)
-    {
-        curseurPresent = false;
-    }
-
-    private void SetCollider()
-    {
+        Debug.Log(gameObject.name);
         switch (sprite.name)
         {
             case "Choix 1":
@@ -49,10 +27,15 @@ public class SpriteClickScript : MonoBehaviour
                 }
             default:
                 {
-                    SharedObjects.SetInt(gameObject.name, 1);
+                    SharedObjects.SetInt(gameObject.name, 0);
                     break;
                 }
         }
+        Debug.Log(SharedObjects.GetInt(gameObject.name));
+    }
+
+    private void OnCollisionStay2D(Collision2D collision)
+    {
         Debug.Log(gameObject.name);
     }
 }
