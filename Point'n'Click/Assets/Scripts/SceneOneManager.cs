@@ -8,11 +8,8 @@ public class SceneOneManager : MonoBehaviour {
     private float Alpha;
 
     public GameObject Vildrac;
-
     public GameObject DummyStopPosition;
-
     public GameObject Couloir;
-
     public GameObject Cursor;
     public GameObject VildracAlcolo;
     public GameObject VildracColere;
@@ -59,5 +56,4 @@ public class SceneOneManager : MonoBehaviour {
         VildracAlcolo.SetActive(true);
         Vildrac.SetActive(false);
     }
-
 }
