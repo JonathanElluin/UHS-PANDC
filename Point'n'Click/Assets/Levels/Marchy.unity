@@ -261,6 +261,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sprite: {fileID: 22076696}
+  collision: {fileID: 1501726896}
 --- !u!1 &263574555
 GameObject:
   m_ObjectHideFlags: 0
@@ -704,6 +705,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sprite: {fileID: 928784980}
+  collision: {fileID: 407620770}
 --- !u!1 &1112651291
 GameObject:
   m_ObjectHideFlags: 0
