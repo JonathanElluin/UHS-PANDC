@@ -261,6 +261,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sprite: {fileID: 22076696}
   collider1: {fileID: 22076697}
+  collision: {fileID: 0}
 --- !u!1 &263574555
 GameObject:
   m_ObjectHideFlags: 0
@@ -343,11 +344,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 263574555}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-<<<<<<< HEAD
-  m_LocalPosition: {x: 574, y: 265, z: 0}
-=======
   m_LocalPosition: {x: 459, y: 200, z: 0}
->>>>>>> 21ef941bc824ac1d8f352e845f773cc32fa28bab
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1378437413}
@@ -690,6 +687,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sprite: {fileID: 928784980}
   collider1: {fileID: 928784983}
+  collision: {fileID: 0}
 --- !u!1 &1112651291
 GameObject:
   m_ObjectHideFlags: 0
@@ -845,11 +843,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1378437412}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-<<<<<<< HEAD
-  m_LocalPosition: {x: -327, y: -237.00002, z: -2760}
-=======
   m_LocalPosition: {x: -212, y: -172, z: -2760}
->>>>>>> 21ef941bc824ac1d8f352e845f773cc32fa28bab
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 263574559}
@@ -1104,6 +1098,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 69aae939f69e5fc448c0f5198ebbd3fb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Background: {fileID: 1505957635}
   Vildrac: {fileID: 1616960232}
   DummyStopPosition: {fileID: 679344979}
   Couloir: {fileID: 1505957635}
@@ -1244,11 +1239,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1883876758}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-<<<<<<< HEAD
-  m_LocalPosition: {x: 111, y: -237.00002, z: -2760}
-=======
   m_LocalPosition: {x: 226, y: -172, z: -2760}
->>>>>>> 21ef941bc824ac1d8f352e845f773cc32fa28bab
   m_LocalScale: {x: 0.99999267, y: 0.99999267, z: 0.99999267}
   m_Children: []
   m_Father: {fileID: 263574559}
