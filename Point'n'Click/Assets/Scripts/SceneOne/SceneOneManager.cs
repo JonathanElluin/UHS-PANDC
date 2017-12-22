@@ -1,37 +1,34 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class SceneOneManager : MonoBehaviour {
 
-
     private SpriteRenderer VildracSpriteRenderer;
+    public GameObject Background;
     private Animator CouloirAnimator;
     private float Alpha;
 
     public GameObject Vildrac;
-
     public GameObject DummyStopPosition;
-
     public GameObject Couloir;
-
     public GameObject Cursor;
     public GameObject VildracAlcolo;
     public GameObject VildracColere;
-    
 
-	// Use this for initialization
-	void Start () {
+
+
+    // Use this for initialization
+    void Start()
+    {
         VildracSpriteRenderer = Vildrac.GetComponent<SpriteRenderer>();
-        VildracSpriteRenderer.material.color = new Color(1.0f, 1.0f, 1.0f, Alpha);
-        CouloirAnimator = Couloir.GetComponent<Animator>();
+        CouloirAnimator = Background.GetComponent<Animator>();
+        VildracSpriteRenderer.material.color = new Color(1.0f, 1.0f, 1.0f, 0);
         CouloirAnimator.SetBool("isOpen", true);
     }
-	
-	// Update is called once per frame
-	void Update () {
+
+    public void Update()
+    {
         VildracManager();
-     }
+    }
 
     private void VildracManager()
     {
