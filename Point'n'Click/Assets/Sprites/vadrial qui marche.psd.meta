@@ -1,6 +1,6 @@
 fileFormatVersion: 2
-guid: bf2337178d698b14fadb1cec90f0c4ce
-timeCreated: 1513853008
+guid: 18bf707df0576ba4c85137a77c548d66
+timeCreated: 1510734595
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
@@ -15,40 +15,6 @@ TextureImporter:
     21300016: vadrial qui marche_8
     21300018: vadrial qui marche_9
     21300020: vadrial qui marche_10
-    21300022: vadrial qui marche_11
-    21300024: vadrial qui marche_12
-    21300026: vadrial qui marche_13
-    21300028: vadrial qui marche_14
-    21300030: vadrial qui marche_15
-    21300032: vadrial qui marche_16
-    21300034: vadrial qui marche_17
-    21300036: vadrial qui marche_18
-    21300038: vadrial qui marche_19
-    21300040: vadrial qui marche_20
-    21300042: vadrial qui marche_21
-    21300044: vadrial qui marche_22
-    21300046: vadrial qui marche_23
-    21300048: vadrial qui marche_24
-    21300050: vadrial qui marche_25
-    21300052: vadrial qui marche_26
-    21300054: vadrial qui marche_27
-    21300056: vadrial qui marche_28
-    21300058: vadrial qui marche_29
-    21300060: vadrial qui marche_30
-    21300062: vadrial qui marche_31
-    21300064: vadrial qui marche_32
-    21300066: vadrial qui marche_33
-    21300068: vadrial qui marche_34
-    21300070: vadrial qui marche_35
-    21300072: vadrial qui marche_36
-    21300074: vadrial qui marche_37
-    21300076: vadrial qui marche_38
-    21300078: vadrial qui marche_39
-    21300080: vadrial qui marche_40
-    21300082: vadrial qui marche_41
-    21300084: vadrial qui marche_42
-    21300086: vadrial qui marche_43
-    21300088: vadrial qui marche_44
   externalObjects: {}
   serializedVersion: 4
   mipmaps:
@@ -162,12 +128,12 @@ TextureImporter:
       name: vadrial qui marche_0
       rect:
         serializedVersion: 2
-        x: 87
-        y: 1868
-        width: 126
-        height: 553
+        x: 47
+        y: 588
+        width: 125
+        height: 552
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -176,12 +142,12 @@ TextureImporter:
       name: vadrial qui marche_1
       rect:
         serializedVersion: 2
-        x: 237
-        y: 1868
-        width: 183
-        height: 553
+        x: 208
+        y: 585
+        width: 170
+        height: 557
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -190,12 +156,12 @@ TextureImporter:
       name: vadrial qui marche_2
       rect:
         serializedVersion: 2
-        x: 387
-        y: 2327
-        width: 24
+        x: 359
+        y: 1048
+        width: 19
         height: 10
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -204,12 +170,12 @@ TextureImporter:
       name: vadrial qui marche_3
       rect:
         serializedVersion: 2
-        x: 410
-        y: 1869
-        width: 164
-        height: 554
+        x: 375
+        y: 590
+        width: 201
+        height: 552
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -218,12 +184,12 @@ TextureImporter:
       name: vadrial qui marche_4
       rect:
         serializedVersion: 2
-        x: 563
-        y: 2328
-        width: 13
-        height: 10
+        x: 667
+        y: 590
+        width: 165
+        height: 552
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -232,12 +198,12 @@ TextureImporter:
       name: vadrial qui marche_5
       rect:
         serializedVersion: 2
-        x: 592
-        y: 1868
-        width: 164
-        height: 553
+        x: 917
+        y: 592
+        width: 165
+        height: 560
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -246,12 +212,12 @@ TextureImporter:
       name: vadrial qui marche_6
       rect:
         serializedVersion: 2
-        x: 871
-        y: 1869
-        width: 164
+        x: 1208
+        y: 590
+        width: 124
         height: 554
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -260,12 +226,12 @@ TextureImporter:
       name: vadrial qui marche_7
       rect:
         serializedVersion: 2
-        x: 1097
-        y: 2328
-        width: 14
-        height: 10
+        x: 369
+        y: 1003
+        width: 6
+        height: 5
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -274,12 +240,12 @@ TextureImporter:
       name: vadrial qui marche_8
       rect:
         serializedVersion: 2
-        x: 1098
-        y: 1869
-        width: 164
-        height: 554
+        x: 369
+        y: 964
+        width: 5
+        height: 4
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -288,12 +254,12 @@ TextureImporter:
       name: vadrial qui marche_9
       rect:
         serializedVersion: 2
-        x: 1327
-        y: 1869
-        width: 154
-        height: 554
+        x: 368
+        y: 941
+        width: 7
+        height: 7
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -302,488 +268,12 @@ TextureImporter:
       name: vadrial qui marche_10
       rect:
         serializedVersion: 2
-        x: 1566
-        y: 1868
-        width: 125
-        height: 551
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: vadrial qui marche_11
-      rect:
-        serializedVersion: 2
-        x: 397
-        y: 2281
-        width: 8
-        height: 4
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: vadrial qui marche_12
-      rect:
-        serializedVersion: 2
-        x: 397
-        y: 2241
-        width: 6
-        height: 5
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: vadrial qui marche_13
-      rect:
-        serializedVersion: 2
-        x: 397
-        y: 2219
-        width: 7
+        x: 378
+        y: 924
+        width: 9
         height: 8
       alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: vadrial qui marche_14
-      rect:
-        serializedVersion: 2
-        x: 407
-        y: 2202
-        width: 10
-        height: 8
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: vadrial qui marche_15
-      rect:
-        serializedVersion: 2
-        x: 397
-        y: 2181
-        width: 5
-        height: 7
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: vadrial qui marche_16
-      rect:
-        serializedVersion: 2
-        x: 57
-        y: 1259
-        width: 128
-        height: 552
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: vadrial qui marche_17
-      rect:
-        serializedVersion: 2
-        x: 258
-        y: 1261
-        width: 161
-        height: 552
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: vadrial qui marche_18
-      rect:
-        serializedVersion: 2
-        x: 409
-        y: 1718
-        width: 13
-        height: 11
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: vadrial qui marche_19
-      rect:
-        serializedVersion: 2
-        x: 453
-        y: 1259
-        width: 162
-        height: 552
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: vadrial qui marche_20
-      rect:
-        serializedVersion: 2
-        x: 604
-        y: 1717
-        width: 13
-        height: 10
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: vadrial qui marche_21
-      rect:
-        serializedVersion: 2
-        x: 659
-        y: 1261
-        width: 162
-        height: 552
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: vadrial qui marche_22
-      rect:
-        serializedVersion: 2
-        x: 948
-        y: 1259
-        width: 164
-        height: 552
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: vadrial qui marche_23
-      rect:
-        serializedVersion: 2
-        x: 1131
-        y: 1261
-        width: 164
-        height: 552
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: vadrial qui marche_24
-      rect:
-        serializedVersion: 2
-        x: 1352
-        y: 1259
-        width: 154
-        height: 552
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: vadrial qui marche_25
-      rect:
-        serializedVersion: 2
-        x: 1587
-        y: 1256
-        width: 125
-        height: 552
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: vadrial qui marche_26
-      rect:
-        serializedVersion: 2
-        x: 578
-        y: 588
-        width: 123
-        height: 552
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: vadrial qui marche_27
-      rect:
-        serializedVersion: 2
-        x: 727
-        y: 588
-        width: 172
-        height: 552
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: vadrial qui marche_28
-      rect:
-        serializedVersion: 2
-        x: 899
-        y: 590
-        width: 166
-        height: 552
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: vadrial qui marche_29
-      rect:
-        serializedVersion: 2
-        x: 1059
-        y: 1095
-        width: 7
-        height: 9
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: vadrial qui marche_30
-      rect:
-        serializedVersion: 2
-        x: 1083
-        y: 588
-        width: 165
-        height: 552
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: vadrial qui marche_31
-      rect:
-        serializedVersion: 2
-        x: 1363
-        y: 590
-        width: 165
-        height: 552
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: vadrial qui marche_32
-      rect:
-        serializedVersion: 2
-        x: 1590
-        y: 590
-        width: 161
-        height: 552
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: vadrial qui marche_33
-      rect:
-        serializedVersion: 2
-        x: 1818
-        y: 590
-        width: 156
-        height: 552
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: vadrial qui marche_34
-      rect:
-        serializedVersion: 2
-        x: 2058
-        y: 588
-        width: 123
-        height: 552
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: vadrial qui marche_35
-      rect:
-        serializedVersion: 2
-        x: 878
-        y: 1044
-        width: 20
-        height: 12
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: vadrial qui marche_36
-      rect:
-        serializedVersion: 2
-        x: 1053
-        y: 1046
-        width: 15
-        height: 12
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: vadrial qui marche_37
-      rect:
-        serializedVersion: 2
-        x: 1588
-        y: 1047
-        width: 14
-        height: 11
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: vadrial qui marche_38
-      rect:
-        serializedVersion: 2
-        x: 889
-        y: 1002
-        width: 6
-        height: 4
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: vadrial qui marche_39
-      rect:
-        serializedVersion: 2
-        x: 888
-        y: 962
-        width: 7
-        height: 4
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: vadrial qui marche_40
-      rect:
-        serializedVersion: 2
-        x: 888
-        y: 939
-        width: 7
-        height: 7
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: vadrial qui marche_41
-      rect:
-        serializedVersion: 2
-        x: 898
-        y: 923
-        width: 5
-        height: 6
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: vadrial qui marche_42
-      rect:
-        serializedVersion: 2
-        x: 888
-        y: 902
-        width: 5
-        height: 5
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: vadrial qui marche_43
-      rect:
-        serializedVersion: 2
-        x: 429
-        y: 820
-        width: 14
-        height: 8
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: vadrial qui marche_44
-      rect:
-        serializedVersion: 2
-        x: 441
-        y: 789
-        width: 14
-        height: 10
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
