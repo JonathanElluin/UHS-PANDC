@@ -29,7 +29,6 @@ public class ClickManager : MonoBehaviour
         }
 
         VildracAnimator.SetBool("isHighlight", true);
-
     }
 
     void OnTriggerExit2D(Collider2D Out)

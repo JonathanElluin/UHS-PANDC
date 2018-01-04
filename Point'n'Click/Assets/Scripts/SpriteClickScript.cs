@@ -32,25 +32,26 @@ public class SpriteClickScript : MonoBehaviour {
         {
             case "Choix 1":
                 {
-                    SharedObjects.SetInt(gameObject.name, 1);
+                    SharedObjects.SetInt(SceneOneManager.CHOICEKEY, 1);
                     break;
                 }
             case "Choix 2":
                 {
-                    SharedObjects.SetInt(gameObject.name, 2);
+                    SharedObjects.SetInt(SceneOneManager.CHOICEKEY, 2);
                     break;
                 }
             case "Choix 3":
                 {
-                    SharedObjects.SetInt(gameObject.name, 3);
+                    SharedObjects.SetInt(SceneOneManager.CHOICEKEY, 3);
                     break;
                 }
             default:
                 {
-                    SharedObjects.SetInt(gameObject.name, 1);
+                    SharedObjects.SetInt(SceneOneManager.CHOICEKEY, 1);
                     break;
                 }
         }
+        SceneOneManager.getInstance().SetChoice();
         Debug.Log(gameObject.name);
     }
 }
