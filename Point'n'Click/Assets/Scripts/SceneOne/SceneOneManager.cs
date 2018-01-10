@@ -124,18 +124,18 @@ public class SceneOneManager : MonoBehaviour
         Destroy(VildracAlcolo.gameObject);
         Destroy(VildracColere.gameObject);
         Vildrac.SetActive(true);
+        VildracAnimator.SetInteger("Speed", 0);
         VildracSpriteRenderer = Vildrac.GetComponent<SpriteRenderer>();
         if (isAlcolo)
         {
             VildracAnimator.SetBool("isAlcolo", true);
         }
-        else
+
+        if (isColere)
         {
-            if (isColere)
-            {
-                VildracAnimator.SetBool("isColere", true);
-            }
+            VildracAnimator.SetBool("isColere", true);
         }
+
         Vildrac.GetComponent<SpriteRenderer>().material.color = new Color(1.0f, 1.0f, 1.0f, 0);
         Alpha = 0;
         while (Alpha <= 1)
