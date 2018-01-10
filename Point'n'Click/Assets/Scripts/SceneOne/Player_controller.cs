@@ -29,7 +29,7 @@ public class Player_controller : MonoBehaviour
         {
             if (startMovingLeft)
             {
-                playerAnimator.SetInteger("Speed", 1);
+                playerAnimator.SetInteger("Speed", -1);
                 transform.Translate(Vector2.left * Speed * Time.deltaTime);
             }
             else
