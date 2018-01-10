@@ -19,7 +19,11 @@ namespace Assets.Scripts
 
         public static int GetInt(string key)
         {
-            return (int)SharedObject[key];
+            if(SharedObject.ContainsKey(key))
+            {
+                return (int)SharedObject[key];
+            }
+            return -1;
         }
     }
 }
