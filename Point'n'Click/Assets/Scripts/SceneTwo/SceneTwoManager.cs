@@ -73,8 +73,15 @@ public class SceneTwoManager : MonoBehaviour {
                 Player_controller.startMovingLeft = false;
                 Player_controller.isIddle = true;
                 textBoxManager.EnableTextBox();
-                //   Invoke("SetChoiceActive", 0.5f);
+           //   Invoke("SetChoiceActive", 0.5f);
             }
+
+            if (textBoxManager.currentLine == textBoxManager.endAtLine)
+            {
+                Player_controller.startMovingLeft = true;
+                Destroy(gameObject);
+            }
+
             Vildrac.GetComponent<SpriteRenderer>().material.color = new Color(1.0f, 1.0f, 1.0f, Alpha);
         }
         else

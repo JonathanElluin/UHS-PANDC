@@ -28,7 +28,7 @@ public class TextBoxManager : MonoBehaviour
         if(instance != this)
         {
             Destroy(gameObject);
-        }
+           }
     }
 
     // Use this for initialization
@@ -43,7 +43,7 @@ public class TextBoxManager : MonoBehaviour
             textLines = (textfile.text.Split('\n'));
         }
 
-        if (endAtLine == 0) ;
+        if (endAtLine == 0) 
         {
             endAtLine = textLines.Length - 1;
         }
@@ -56,17 +56,16 @@ public class TextBoxManager : MonoBehaviour
     void Update()
     {
         theText.text = textLines[currentLine];
-
+                
         if (Input.GetKeyDown(KeyCode.Return) && isActive)
         {
             currentLine += 1;
 
         }
 
-        if(currentLine > endAtLine)
+        if(currentLine >= endAtLine)
         {
             DisableTextBox();
-
         }
     }
 
@@ -87,4 +86,7 @@ public class TextBoxManager : MonoBehaviour
     {
         return instance;
     }
+
+   
+
 }
