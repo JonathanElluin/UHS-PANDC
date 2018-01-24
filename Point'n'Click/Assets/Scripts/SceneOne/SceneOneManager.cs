@@ -1,11 +1,13 @@
 ﻿using Assets.Scripts;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class SceneOneManager : MonoBehaviour
 {
 
     private SpriteRenderer VildracSpriteRenderer;
     public GameObject Background;
+    public GameObject ChoixText;
     private Animator CouloirAnimator;
     private float Alpha;
 
@@ -82,10 +84,13 @@ public class SceneOneManager : MonoBehaviour
                 if (Vildrac.transform.position.x <= DummyEndPosition.transform.position.x)
                 {
                     Alpha -= 0.05f;
-
+                    Vildrac.GetComponent<SpriteRenderer>().material.color = new Color(1.0f, 1.0f, 1.0f, Alpha);
                     if (Alpha <= 0)
                     {
                         Destroy(gameObject);
+                        PlayerPrefs.SetInt("ChoiceScene1",isAlcolo ? 0 : 1);
+                        PlayerPrefs.SetInt("SceneToLoad", 2);
+                        Application.Quit();
                     }
                 }
             }
@@ -96,6 +101,7 @@ public class SceneOneManager : MonoBehaviour
     {
         Cursor.SetActive(true);
         VildracColere.SetActive(true);
+        ChoixText.SetActive(true);
         VildracAlcolo.SetActive(true);
         Vildrac.SetActive(false);
         isStart = false;
@@ -123,6 +129,7 @@ public class SceneOneManager : MonoBehaviour
         Destroy(Cursor.gameObject);
         Destroy(VildracAlcolo.gameObject);
         Destroy(VildracColere.gameObject);
+        Destroy(ChoixText);
         Vildrac.SetActive(true);
         VildracAnimator.SetInteger("Speed", 0);
         VildracSpriteRenderer = Vildrac.GetComponent<SpriteRenderer>();
@@ -143,6 +150,6 @@ public class SceneOneManager : MonoBehaviour
             Alpha += 0.05f;
             Vildrac.GetComponent<SpriteRenderer>().material.color = new Color(1.0f, 1.0f, 1.0f, Alpha);
         }
-       
+        Alpha = 1;
     }
 }
