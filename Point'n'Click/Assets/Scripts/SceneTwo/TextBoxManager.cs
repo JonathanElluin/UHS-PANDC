@@ -14,7 +14,7 @@ public class TextBoxManager : MonoBehaviour
     public string[] textLines;
 
     private int currentLine = 0;
-    public int endAtLine;
+    private int endAtLine = 0;
 
     public PlayerController player;
 
@@ -55,14 +55,21 @@ public class TextBoxManager : MonoBehaviour
         if (currentLine >= endAtLine)
         {
             currentTextFile++;
+            ResetValues();
             Setup();
             DisableTextBox();
         }
     }
 
-    private void Setup()
+    private void ResetValues()
     {
         currentLine = 0;
+        endAtLine = 0;
+    }
+
+    private void Setup()
+    {
+        
         if (currentTextFile < textFiles.Length)
         {
             if (textFiles.Length != 0)

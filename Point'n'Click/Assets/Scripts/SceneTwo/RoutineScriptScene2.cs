@@ -5,7 +5,10 @@ using UnityEngine;
 public class RoutineScriptScene2 : MonoBehaviour {
 
     public GameObject Vildrac;
-    public Transform[] DummyStopsPosition;
+
+    public Transform DummyPositions;
+    private List<Transform> DummyStopsPositionArray = new List<Transform>();
+
     private int currentPosition = 0;
     public TextBoxManager myDialogManager;
     private Animator VildracAnimator;
@@ -16,18 +19,14 @@ public class RoutineScriptScene2 : MonoBehaviour {
 
     // Use this for initialization
 
-    private void Awake()
+    void Start()
     {
         VildracAnimator = Vildrac.GetComponent<Animator>();
         VildracSpriteRenderer = Vildrac.GetComponent<SpriteRenderer>();
         VildracSpriteRenderer.material.color = new Color(1.0f, 1.0f, 1.0f, 0);
         myDialogManager.DisableTextBox();
+        InitPositions();
         InitSprites();
-    }
-
-    void Start()
-    {
-       
     }
 
     // Update is called once per frame
@@ -45,7 +44,7 @@ public class RoutineScriptScene2 : MonoBehaviour {
                 Alpha += 0.02f;
             }
             VildracSpriteRenderer.material.color = new Color(1.0f, 1.0f, 1.0f, Alpha);
-            if (Vildrac.transform.position.x <= DummyStopsPosition[currentPosition].position.x)
+            if (Vildrac.transform.position.x <= DummyStopsPositionArray[currentPosition].position.x)
             {
                 myDialogManager.EnableTextBox();
                 Player_controller.startMovingLeft = false;
@@ -55,16 +54,29 @@ public class RoutineScriptScene2 : MonoBehaviour {
          
         }
 
-        if (!myDialogManager.isActive && currentPosition == 1)
+        if (!myDialogManager.isActive)
+        {
+
+        }
+
+            if (!myDialogManager.isActive && currentPosition == 1)
         {
             Player_controller.isIddle = false;
             Player_controller.startMovingLeft = true;
-            if (Vildrac.transform.position.x <= DummyStopsPosition[currentPosition].position.x)
+            if (Vildrac.transform.position.x <= DummyStopsPositionArray[currentPosition].position.x)
             {
                 myDialogManager.EnableTextBox();
                 Player_controller.startMovingLeft = false;
                 Player_controller.isIddle = true;
             }
+        }
+    }
+
+    public void InitPositions()
+    {
+        foreach(Transform t in DummyPositions)
+        {
+            DummyStopsPositionArray.Add(t);
         }
     }
 
