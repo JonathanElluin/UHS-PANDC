@@ -76,11 +76,10 @@ public class SceneTwoManager : MonoBehaviour {
            //   Invoke("SetChoiceActive", 0.5f);
             }
 
-            if (textBoxManager.currentLine == textBoxManager.endAtLine)
-            {
-                Player_controller.startMovingLeft = true;
-                Destroy(gameObject);
-            }
+            //if (textBoxManager.currentLine == textBoxManager.endAtLine)
+            //{
+            //    Player_controller.startMovingLeft = true;
+            //}
 
             Vildrac.GetComponent<SpriteRenderer>().material.color = new Color(1.0f, 1.0f, 1.0f, Alpha);
         }

@@ -9,10 +9,11 @@ public class TextBoxManager : MonoBehaviour
     public static TextBoxManager instance;
     public Text theText;
 
-    public TextAsset textfile;
+    public TextAsset[] textFiles;
+    private int currentTextFile = 0;
     public string[] textLines;
 
-    public int currentLine;
+    private int currentLine = 0;
     public int endAtLine;
 
     public PlayerController player;
@@ -21,58 +22,75 @@ public class TextBoxManager : MonoBehaviour
 
     private void Awake()
     {
-        if(instance == null)
+        if (instance == null)
         {
             instance = this;
         }
-        if(instance != this)
+        if (instance != this)
         {
             Destroy(gameObject);
-           }
+        }
     }
 
     // Use this for initialization
     void Start()
     {
-
-        //       player = FindObjectOfType<PlayerController>;
-
-        if (textfile != null)
-        {
-
-            textLines = (textfile.text.Split('\n'));
-        }
-
-        if (endAtLine == 0) 
-        {
-            endAtLine = textLines.Length - 1;
-        }
-
-
+        Setup();
     }
 
-    
+
 
     void Update()
     {
-        theText.text = textLines[currentLine];
-                
-        if (Input.GetKeyDown(KeyCode.Return) && isActive)
+        if (currentLine < textLines.Length)
         {
-            currentLine += 1;
-
+            theText.text = textLines[currentLine];
         }
 
-        if(currentLine >= endAtLine)
+        if (Input.GetKeyDown(KeyCode.Return) && isActive)
         {
+            currentLine++;
+        }
+
+        if (currentLine >= endAtLine)
+        {
+            currentTextFile++;
+            Setup();
             DisableTextBox();
         }
     }
 
+    private void Setup()
+    {
+        currentLine = 0;
+        if (currentTextFile < textFiles.Length)
+        {
+            if (textFiles.Length != 0)
+            {
+
+                textLines = (textFiles[currentTextFile].text.Split('\n'));
+            }
+
+            if (endAtLine == 0)
+            {
+                endAtLine = textLines.Length - 1;
+            }
+        }
+        else
+        {
+            Destroy(textBox);
+            Destroy(gameObject);
+        }
+
+    }
+
     public void EnableTextBox()
     {
-        isActive = true;
-        textBox.SetActive(true);
+        if (textBox != null)
+        {
+            isActive = true;
+            textBox.SetActive(true);
+        }
 
     }
 
@@ -87,6 +105,6 @@ public class TextBoxManager : MonoBehaviour
         return instance;
     }
 
-   
+
 
 }
