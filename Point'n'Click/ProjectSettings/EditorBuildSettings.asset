@@ -4,4 +4,13 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Levels/Loader.unity
+    guid: 8fd5b8817c2b00244988bd6047e049ae
+  - enabled: 1
+    path: Assets/Levels/Marchy.unity
+    guid: ce3b98c13fb765141bd38f4df365b7c8
+  - enabled: 1
+    path: Assets/Levels/StorySelect2.unity
+    guid: edb9fe8814b16ab47ae7d64f01153408
