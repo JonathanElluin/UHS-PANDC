@@ -9,7 +9,10 @@ public class TextBoxManager : MonoBehaviour
     public static TextBoxManager instance;
     public Text theText;
 
-    public TextAsset[] textFiles;
+    public TextAsset[] textFilesAlcolo;
+    public TextAsset[] textFilesColere;
+
+    private List<TextAsset> textFiles = new List<TextAsset>();
     private int currentTextFile = 0;
     public string[] textLines;
 
@@ -35,6 +38,24 @@ public class TextBoxManager : MonoBehaviour
     // Use this for initialization
     void Start()
     {
+        switch (PlayerPrefs.GetInt("ChoiceScene1", 0))
+        {
+            case 0:
+                foreach (var t in textFilesAlcolo)
+                {
+                    textFiles.Add(t);
+                }
+                break;
+            case 1:
+                foreach (var t in textFilesColere)
+                {
+                    textFiles.Add(t);
+
+                }
+                break;
+            default:
+                break;
+        }
         Setup();
     }
 
@@ -52,7 +73,7 @@ public class TextBoxManager : MonoBehaviour
             currentLine++;
         }
 
-        if (currentLine >= endAtLine)
+        if (currentLine > endAtLine)
         {
             currentTextFile++;
             ResetValues();
@@ -69,12 +90,10 @@ public class TextBoxManager : MonoBehaviour
 
     private void Setup()
     {
-        
-        if (currentTextFile < textFiles.Length)
+         if (currentTextFile < textFiles.Count)
         {
-            if (textFiles.Length != 0)
+            if (textFiles.Count != 0)
             {
-
                 textLines = (textFiles[currentTextFile].text.Split('\n'));
             }
 
