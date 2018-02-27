@@ -68,11 +68,6 @@ public class TextBoxManager : MonoBehaviour
             theText.text = textLines[currentLine];
         }
 
-        if (Input.GetKeyDown(KeyCode.Return) && isActive)
-        {
-            currentLine++;
-        }
-
         if (currentLine > endAtLine)
         {
             currentTextFile++;
@@ -115,6 +110,7 @@ public class TextBoxManager : MonoBehaviour
         if (textBox != null)
         {
             isActive = true;
+            StartCoroutine("TextCoroutine");
             textBox.SetActive(true);
         }
 
@@ -122,6 +118,7 @@ public class TextBoxManager : MonoBehaviour
 
     public void DisableTextBox()
     {
+        StopCoroutine("TextCoroutine");
         isActive = false;
         textBox.SetActive(false);
     }
@@ -130,7 +127,15 @@ public class TextBoxManager : MonoBehaviour
     {
         return instance;
     }
-
-
+    
+    public IEnumerator TextCoroutine()
+    {
+        if(isActive)
+        {
+            yield return new WaitForSeconds(3f);
+            currentLine++;
+            StartCoroutine("TextCoroutine");
+        }
+    }
 
 }
