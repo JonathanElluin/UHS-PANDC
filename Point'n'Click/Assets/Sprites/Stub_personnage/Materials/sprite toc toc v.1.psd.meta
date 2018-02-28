@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: 503abe18f5c28bd4e983dd11adc2c6fc
-timeCreated: 1517956325
+timeCreated: 1519809085
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
@@ -116,24 +116,10 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: sprite toc toc_left
-      rect:
-        serializedVersion: 2
-        x: 351
-        y: 441
-        width: 265
-        height: 305
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-    - serializedVersion: 2
       name: sprite toc toc_right
       rect:
         serializedVersion: 2
-        x: 1230
+        x: 1231
         y: 582
         width: 358
         height: 250

@@ -10,7 +10,7 @@ public class RoutineScriptScene2 : MonoBehaviour
     public Transform DummyPositions;
     private List<Transform> DummyStopsPositionArray = new List<Transform>();
 
-    private int currentPosition = 0;
+    private int currentStep = 0;
     public TextBoxManager myDialogManager;
     private Animator VildracAnimator;
     private SpriteRenderer VildracSpriteRenderer;
@@ -18,6 +18,8 @@ public class RoutineScriptScene2 : MonoBehaviour
     public GameObject Woman;
     public GameObject Background;
     public GameObject Cursor;
+    public Transform DummyWindowPosition;
+    public GameObject WindowPrefab;
 
     public Sprite CursorAlcoolique;
     public Sprite CursorColerique;
@@ -25,6 +27,7 @@ public class RoutineScriptScene2 : MonoBehaviour
     private SpriteRenderer CursorRenderer;
 
     private Animator BureauAnimator;
+    private GameObject Window;
     private float Alpha;
     private float AlphaWoman;
 
@@ -44,36 +47,29 @@ public class RoutineScriptScene2 : MonoBehaviour
         InitSprites();
        // PlayerPrefs.DeleteAll();
     }
-
     // Update is called once per frame
     void Update()
     {
         if (Alpha >= 1)
         {
-            if (currentPosition == 0)
+            if (currentStep == 0)
             {
-                myDialogManager.EnableTextBox();
-                currentPosition++;
+                Step0();
+            }else if(!myDialogManager.isActive && currentStep == 1)
+            {
+                Step1();
             }
-            else if (!myDialogManager.isActive && currentPosition == 1)
+            else if (!myDialogManager.isActive && currentStep == 2)
             {
-                BureauAnimator.SetBool("IsOpen", true);
-                Woman = Instantiate(Woman, WomanSpawn.position, WomanSpawn.rotation);
-                Woman.GetComponent<SpriteRenderer>().material.color = new Color(1.0f, 1.0f, 1.0f, AlphaWoman);
-                currentPosition++;
-            }else if(currentPosition == 2 && BureauAnimator.GetCurrentAnimatorStateInfo(0).IsName("BureauPorteOuverte"))
+                Step2();
+            }
+            else if (!myDialogManager.isActive && currentStep == 3)
             {
-                if(AlphaWoman <= 1)
-                {
-                    AlphaWoman += 0.02f;
-                    Woman.GetComponent<SpriteRenderer>().material.color = new Color(1.0f, 1.0f, 1.0f, AlphaWoman);
-                }
-                else
-                {
-                    myDialogManager.EnableTextBox();
-                    currentPosition++;
-                }
-            }else if(currentPosition == 3 && !myDialogManager.isActive)
+                Step3();
+            }else if(currentStep == 4 && BureauAnimator.GetCurrentAnimatorStateInfo(0).IsName("BureauPorteOuverte"))
+            {
+                Step4();
+            }else if(currentStep == 5 && !myDialogManager.isActive)
             {
                 SetChoiceActive();
             }
@@ -96,8 +92,6 @@ public class RoutineScriptScene2 : MonoBehaviour
     public void SetChoiceActive()
     {
         Cursor.SetActive(true);
-        
-
     }
 
     public void InitSprites()
@@ -116,4 +110,47 @@ public class RoutineScriptScene2 : MonoBehaviour
                 break;
         }
     }
+
+    public void Step0()
+    {
+        myDialogManager.EnableTextBox();
+        currentStep++;
+    }
+
+    public void Step1()
+    {
+        Window = Instantiate(WindowPrefab, DummyWindowPosition.position, DummyWindowPosition.transform.rotation);
+        Destroy(Window, 5f);
+        currentStep++;
+    }
+
+    public void Step2()
+    {
+        myDialogManager.EnableTextBox();
+        currentStep++;
+    }
+
+    public void Step3()
+    {
+        BureauAnimator.SetBool("IsOpen", true);
+        Woman = Instantiate(Woman, WomanSpawn.position, WomanSpawn.rotation);
+        Woman.GetComponent<SpriteRenderer>().material.color = new Color(1.0f, 1.0f, 1.0f, AlphaWoman);
+        currentStep++;
+    }
+
+    public void Step4()
+    {
+        if (AlphaWoman <= 1)
+        {
+            AlphaWoman += 0.02f;
+            Woman.GetComponent<SpriteRenderer>().material.color = new Color(1.0f, 1.0f, 1.0f, AlphaWoman);
+        }
+        else
+        {
+            myDialogManager.EnableTextBox();
+            currentStep++;
+        }
+    }
+
+
 }
