@@ -11,6 +11,7 @@ public class TextBoxManager : MonoBehaviour
 
     public TextAsset[] textFilesAlcolo;
     public TextAsset[] textFilesColere;
+    public RoutineScriptScene2 manager;
 
     private List<TextAsset> textFiles = new List<TextAsset>();
     private int currentTextFile = 0;
@@ -18,10 +19,11 @@ public class TextBoxManager : MonoBehaviour
 
     private int currentLine = 0;
     private int endAtLine = 0;
+    private bool isWithNextStep;
 
     public PlayerController player;
 
-    public bool isActive;
+    public bool isActivated;
 
     private void Awake()
     {
@@ -109,18 +111,34 @@ public class TextBoxManager : MonoBehaviour
     {
         if (textBox != null)
         {
-            isActive = true;
+            isActivated = true;
             StartCoroutine("TextCoroutine");
             textBox.SetActive(true);
+            isWithNextStep = false;
         }
 
+    }
+
+    public void EnableTextBoxWithNextStep()
+    {
+        if (textBox != null)
+        {
+            isActivated = true;
+            StartCoroutine("TextCoroutine");
+            textBox.SetActive(true);
+            isWithNextStep = true;
+        }
     }
 
     public void DisableTextBox()
     {
         StopCoroutine("TextCoroutine");
-        isActive = false;
+        isActivated = false;
         textBox.SetActive(false);
+        if (isWithNextStep)
+        {
+            manager.NextStep();
+        }         
     }
 
     public static TextBoxManager getInstance()
@@ -130,7 +148,7 @@ public class TextBoxManager : MonoBehaviour
     
     public IEnumerator TextCoroutine()
     {
-        if(isActive)
+        if(isActivated)
         {
             yield return new WaitForSeconds(3f);
             currentLine++;
