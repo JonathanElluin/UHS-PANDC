@@ -14,9 +14,19 @@ public class RoutineScriptScene2 : MonoBehaviour
     public TextBoxManager myDialogManager;
     private Animator VildracAnimator;
     private SpriteRenderer VildracSpriteRenderer;
+    public Transform WomanSpawn;
+    public GameObject Woman;
     public GameObject Background;
+    public GameObject Cursor;
+
+    public Sprite CursorAlcoolique;
+    public Sprite CursorColerique;
+
+    private SpriteRenderer CursorRenderer;
+
     private Animator BureauAnimator;
     private float Alpha;
+    private float AlphaWoman;
 
     // Use this for initialization
 
@@ -24,11 +34,15 @@ public class RoutineScriptScene2 : MonoBehaviour
     {
         VildracAnimator = Vildrac.GetComponent<Animator>();
         VildracSpriteRenderer = Vildrac.GetComponent<SpriteRenderer>();
+        BureauAnimator = Background.GetComponent<Animator>();
+        CursorRenderer = Cursor.GetComponent<SpriteRenderer>();
+        Cursor.SetActive(false);
         VildracSpriteRenderer.material.color = new Color(1.0f, 1.0f, 1.0f, 0);
         Alpha = 0;
         myDialogManager.DisableTextBox();
         InitPositions();
         InitSprites();
+       // PlayerPrefs.DeleteAll();
     }
 
     // Update is called once per frame
@@ -43,8 +57,25 @@ public class RoutineScriptScene2 : MonoBehaviour
             }
             else if (!myDialogManager.isActive && currentPosition == 1)
             {
-
-                Debug.Log("suite"); 
+                BureauAnimator.SetBool("IsOpen", true);
+                Woman = Instantiate(Woman, WomanSpawn.position, WomanSpawn.rotation);
+                Woman.GetComponent<SpriteRenderer>().material.color = new Color(1.0f, 1.0f, 1.0f, AlphaWoman);
+                currentPosition++;
+            }else if(currentPosition == 2 && BureauAnimator.GetCurrentAnimatorStateInfo(0).IsName("BureauPorteOuverte"))
+            {
+                if(AlphaWoman <= 1)
+                {
+                    AlphaWoman += 0.02f;
+                    Woman.GetComponent<SpriteRenderer>().material.color = new Color(1.0f, 1.0f, 1.0f, AlphaWoman);
+                }
+                else
+                {
+                    myDialogManager.EnableTextBox();
+                    currentPosition++;
+                }
+            }else if(currentPosition == 3 && !myDialogManager.isActive)
+            {
+                SetChoiceActive();
             }
         }
         else
@@ -52,42 +83,6 @@ public class RoutineScriptScene2 : MonoBehaviour
             Alpha += 0.05f;
             VildracSpriteRenderer.material.color = new Color(1.0f, 1.0f, 1.0f, Alpha);
         }
-
-
-
-
-
-        //    if ((VildracAnimator.GetCurrentAnimatorStateInfo(0).IsName("Idle_vildrac_alcolo") || VildracAnimator.GetCurrentAnimatorStateInfo(0).IsName("Idle_vildrac_colere")) && currentPosition == 0)
-        //    {
-        //        Player_controller.startMovingLeft = true;           
-        //    }
-        //    if (Player_controller.startMovingLeft && currentPosition == 0)
-        //    {
-        //        if (Alpha <= 1)
-        //        {
-        //            Alpha += 0.02f;
-        //        }
-        //        VildracSpriteRenderer.material.color = new Color(1.0f, 1.0f, 1.0f, Alpha);
-        //        if (Vildrac.transform.position.x <= DummyStopsPositionArray[currentPosition].position.x)
-        //        {
-        //            myDialogManager.EnableTextBox();
-        //            Player_controller.startMovingLeft = false;
-        //            Player_controller.isIddle = true;
-        //            currentPosition++;
-        //        }
-        //    }
-
-        //if (!myDialogManager.isActive && currentPosition == 1)
-        //    {
-        //        Player_controller.isIddle = false;
-        //        Player_controller.startMovingLeft = true;
-        //        if (Vildrac.transform.position.x <= DummyStopsPositionArray[currentPosition].position.x)
-        //        {
-        //            myDialogManager.EnableTextBox();
-        //            Player_controller.startMovingLeft = false;
-        //            Player_controller.isIddle = true;
-        //        }
-        //    }
     }
 
     public void InitPositions()
@@ -98,15 +93,24 @@ public class RoutineScriptScene2 : MonoBehaviour
         }
     }
 
+    public void SetChoiceActive()
+    {
+        Cursor.SetActive(true);
+        
+
+    }
+
     public void InitSprites()
     {
         switch (PlayerPrefs.GetInt("ChoiceScene1", 0))
         {
             case 0:
+                CursorRenderer.sprite = CursorAlcoolique;
                 VildracAnimator.SetBool("isAlcolo", true);
                 VildracAnimator.SetBool("isColere", false);
                 break;
             case 1:
+                CursorRenderer.sprite = CursorColerique;
                 VildracAnimator.SetBool("isAlcolo", false);
                 VildracAnimator.SetBool("isColere", true);
                 break;
