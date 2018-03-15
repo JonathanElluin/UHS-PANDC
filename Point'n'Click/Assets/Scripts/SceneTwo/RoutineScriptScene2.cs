@@ -98,7 +98,7 @@ public class RoutineScriptScene2 : MonoBehaviour
         Window = Instantiate(WindowPrefab, DummyWindowPosition.position, DummyWindowPosition.rotation);
         Window.GetComponent<Renderer>().sortingOrder = 25;
         Destroy(Window, 3f);
-        Invoke("NextStep", 0.5f);
+        Invoke("NextStep", 1f);
     }
 
     public void Step2()
@@ -118,17 +118,12 @@ public class RoutineScriptScene2 : MonoBehaviour
         BureauAnimator.SetBool("IsOpen", true);
         Woman = Instantiate(Woman, WomanSpawn.position, WomanSpawn.rotation);
         Woman.GetComponent<SpriteRenderer>().material.color = new Color(1.0f, 1.0f, 1.0f, AlphaWoman);
-        NextStep();
+        Invoke("NextStep",2f);
     }
 
     public void Step5()
     {
-        while(AlphaWoman <= 1)
-        {
-            AlphaWoman += 0.02f;
-            Woman.GetComponent<SpriteRenderer>().material.color = new Color(1.0f, 1.0f, 1.0f, AlphaWoman);
-        }
-       
+        StartCoroutine("WomanAppear");
     }
 
     public void NextStep()
@@ -161,4 +156,16 @@ public class RoutineScriptScene2 : MonoBehaviour
                 break;
         }
     }
+
+    IEnumerator WomanAppear()
+    {
+        while (AlphaWoman <= 1)
+        {
+            AlphaWoman += 0.1f;
+            Woman.GetComponent<SpriteRenderer>().material.color = new Color(1.0f, 1.0f, 1.0f, AlphaWoman);
+            yield return new WaitForSeconds(0.1f);
+        }
+        yield return null;
+    }
+
 }
