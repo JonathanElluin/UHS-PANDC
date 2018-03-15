@@ -1,85 +1,171 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Threading;
 using UnityEngine;
 
-public class RoutineScriptScene2 : MonoBehaviour {
+public class RoutineScriptScene2 : MonoBehaviour
+{
 
     public GameObject Vildrac;
-    public Transform[] DummyStopsPosition;
-    private int currentPosition = 0;
+
+    public Transform DummyPositions;
+    private List<Transform> DummyStopsPositionArray = new List<Transform>();
+
+    private int currentStep = 0;
     public TextBoxManager myDialogManager;
     private Animator VildracAnimator;
     private SpriteRenderer VildracSpriteRenderer;
+    public Transform WomanSpawn;
+    public Transform DummyParticlePosition;
+    public GameObject TocTocParticlePrefab;
+    public GameObject Woman;
     public GameObject Background;
+    public GameObject Cursor;
+    public Transform DummyWindowPosition;
+    public GameObject WindowPrefab;
+
+    public Sprite mapsSprite;
+    public Sprite demineurSprite;
+
+    public Sprite CursorAlcoolique;
+    public Sprite CursorColerique;
+
+    private SpriteRenderer CursorRenderer;
+
     private Animator BureauAnimator;
+    private GameObject Window;
+    private GameObject TocTocParticle;
     private float Alpha;
+    private float AlphaWoman;
+    private SpriteRenderer windowSpriteRenderer;
 
     // Use this for initialization
 
-    private void Awake()
+    void Start()
     {
         VildracAnimator = Vildrac.GetComponent<Animator>();
         VildracSpriteRenderer = Vildrac.GetComponent<SpriteRenderer>();
-        VildracSpriteRenderer.material.color = new Color(1.0f, 1.0f, 1.0f, 0);
-        myDialogManager.DisableTextBox();
+        BureauAnimator = Background.GetComponent<Animator>();
+        CursorRenderer = Cursor.GetComponent<SpriteRenderer>();
+        Cursor.SetActive(false);
+        Alpha = 0;
+        //myDialogManager.DisableTextBox();
+        InitPositions();
         InitSprites();
+        PlayStep(0);
+        // PlayerPrefs.DeleteAll();
     }
 
-    void Start()
+    public void InitPositions()
     {
-       
+        foreach (Transform t in DummyPositions)
+        {
+            DummyStopsPositionArray.Add(t);
+        }
     }
 
-    // Update is called once per frame
-    void Update()
+    public void SetChoiceActive()
     {
-        if (VildracAnimator.GetCurrentAnimatorStateInfo(0).IsName("Idle_vildrac_alcolo") || VildracAnimator.GetCurrentAnimatorStateInfo(0).IsName("Idle_vildrac_colere") && currentPosition == 0)
-        {
-            Player_controller.startMovingLeft = true;
-           
-        }
-        if (Player_controller.startMovingLeft && currentPosition == 0)
-        {
-            if (Alpha <= 1)
-            {
-                Alpha += 0.02f;
-            }
-            VildracSpriteRenderer.material.color = new Color(1.0f, 1.0f, 1.0f, Alpha);
-            if (Vildrac.transform.position.x <= DummyStopsPosition[currentPosition].position.x)
-            {
-                myDialogManager.EnableTextBox();
-                Player_controller.startMovingLeft = false;
-                Player_controller.isIddle = true;
-                currentPosition++;
-            }
-         
-        }
-
-        if (!myDialogManager.isActive && currentPosition == 1)
-        {
-            Player_controller.isIddle = false;
-            Player_controller.startMovingLeft = true;
-            if (Vildrac.transform.position.x <= DummyStopsPosition[currentPosition].position.x)
-            {
-                myDialogManager.EnableTextBox();
-                Player_controller.startMovingLeft = false;
-                Player_controller.isIddle = true;
-            }
-        }
+        Cursor.SetActive(true);
     }
 
     public void InitSprites()
     {
-        switch(PlayerPrefs.GetInt("ChoiceScene1",0))
+        windowSpriteRenderer = WindowPrefab.GetComponent<SpriteRenderer>();
+        switch (PlayerPrefs.GetInt("ChoiceScene1", 0))
         {
             case 0:
+                CursorRenderer.sprite = CursorAlcoolique;
                 VildracAnimator.SetBool("isAlcolo", true);
                 VildracAnimator.SetBool("isColere", false);
                 break;
             case 1:
+                CursorRenderer.sprite = CursorColerique;
                 VildracAnimator.SetBool("isAlcolo", false);
                 VildracAnimator.SetBool("isColere", true);
                 break;
         }
     }
+
+    public void Step0()
+    {
+        myDialogManager.EnableTextBoxWithNextStep();
+    }
+
+    public void Step1()
+    {
+        WindowPrefab.GetComponent<SpriteRenderer>().sprite = mapsSprite;
+        Window = Instantiate(WindowPrefab, DummyWindowPosition.position, DummyWindowPosition.rotation);
+        Window.GetComponent<Renderer>().sortingOrder = 25;
+        Destroy(Window, 3f);
+        Invoke("NextStep", 1f);
+    }
+
+    public void Step2()
+    {
+        myDialogManager.EnableTextBox();
+        TocTocParticle = Instantiate(TocTocParticlePrefab, DummyParticlePosition.position, DummyParticlePosition.rotation);
+        Invoke("NextStep", 3f);
+    }
+
+    public void Step3()
+    {
+        myDialogManager.EnableTextBoxWithNextStep();
+    }
+
+    public void Step4()
+    {
+        BureauAnimator.SetBool("IsOpen", true);
+        Woman = Instantiate(Woman, WomanSpawn.position, WomanSpawn.rotation);
+        Woman.GetComponent<SpriteRenderer>().material.color = new Color(1.0f, 1.0f, 1.0f, AlphaWoman);
+        Invoke("NextStep",2f);
+    }
+
+    public void Step5()
+    {
+        StartCoroutine("WomanAppear");
+    }
+
+    public void NextStep()
+    {
+        currentStep++;
+        PlayStep(currentStep);
+    }
+
+    public void PlayStep(int step)
+    {
+        switch (step)
+        {
+            case 1:
+                Step1();
+                break;
+            case 2:
+                Step2();
+                break;
+            case 3:
+                Step3();
+                break;
+            case 4:
+                Step4();
+                break;
+            case 5:
+                Step5();
+                break;
+            default:
+                Step0();
+                break;
+        }
+    }
+
+    IEnumerator WomanAppear()
+    {
+        while (AlphaWoman <= 1)
+        {
+            AlphaWoman += 0.1f;
+            Woman.GetComponent<SpriteRenderer>().material.color = new Color(1.0f, 1.0f, 1.0f, AlphaWoman);
+            yield return new WaitForSeconds(0.1f);
+        }
+        yield return null;
+    }
+
 }

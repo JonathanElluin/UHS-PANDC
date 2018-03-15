@@ -9,16 +9,21 @@ public class TextBoxManager : MonoBehaviour
     public static TextBoxManager instance;
     public Text theText;
 
-    public TextAsset[] textFiles;
+    public TextAsset[] textFilesAlcolo;
+    public TextAsset[] textFilesColere;
+    public RoutineScriptScene2 manager;
+
+    private List<TextAsset> textFiles = new List<TextAsset>();
     private int currentTextFile = 0;
     public string[] textLines;
 
     private int currentLine = 0;
-    public int endAtLine;
+    private int endAtLine = 0;
+    private bool isWithNextStep;
 
     public PlayerController player;
 
-    public bool isActive;
+    public bool isActivated;
 
     private void Awake()
     {
@@ -35,6 +40,24 @@ public class TextBoxManager : MonoBehaviour
     // Use this for initialization
     void Start()
     {
+        switch (PlayerPrefs.GetInt("ChoiceScene1", 0))
+        {
+            case 0:
+                foreach (var t in textFilesAlcolo)
+                {
+                    textFiles.Add(t);
+                }
+                break;
+            case 1:
+                foreach (var t in textFilesColere)
+                {
+                    textFiles.Add(t);
+
+                }
+                break;
+            default:
+                break;
+        }
         Setup();
     }
 
@@ -47,27 +70,27 @@ public class TextBoxManager : MonoBehaviour
             theText.text = textLines[currentLine];
         }
 
-        if (Input.GetKeyDown(KeyCode.Return) && isActive)
-        {
-            currentLine++;
-        }
-
-        if (currentLine >= endAtLine)
+        if (currentLine > endAtLine)
         {
             currentTextFile++;
+            ResetValues();
             Setup();
             DisableTextBox();
         }
     }
 
-    private void Setup()
+    private void ResetValues()
     {
         currentLine = 0;
-        if (currentTextFile < textFiles.Length)
-        {
-            if (textFiles.Length != 0)
-            {
+        endAtLine = 0;
+    }
 
+    private void Setup()
+    {
+         if (currentTextFile < textFiles.Count)
+        {
+            if (textFiles.Count != 0)
+            {
                 textLines = (textFiles[currentTextFile].text.Split('\n'));
             }
 
@@ -88,23 +111,49 @@ public class TextBoxManager : MonoBehaviour
     {
         if (textBox != null)
         {
-            isActive = true;
+            isActivated = true;
+            StartCoroutine("TextCoroutine");
             textBox.SetActive(true);
+            isWithNextStep = false;
         }
 
     }
 
+    public void EnableTextBoxWithNextStep()
+    {
+        if (textBox != null)
+        {
+            isActivated = true;
+            StartCoroutine("TextCoroutine");
+            textBox.SetActive(true);
+            isWithNextStep = true;
+        }
+    }
+
     public void DisableTextBox()
     {
-        isActive = false;
+        StopCoroutine("TextCoroutine");
+        isActivated = false;
         textBox.SetActive(false);
+        if (isWithNextStep)
+        {
+            manager.NextStep();
+        }         
     }
 
     public static TextBoxManager getInstance()
     {
         return instance;
     }
-
-
+    
+    public IEnumerator TextCoroutine()
+    {
+        if(isActivated)
+        {
+            yield return new WaitForSeconds(3f);
+            currentLine++;
+            StartCoroutine("TextCoroutine");
+        }
+    }
 
 }
