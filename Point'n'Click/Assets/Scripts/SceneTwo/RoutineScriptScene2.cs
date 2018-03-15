@@ -96,6 +96,7 @@ public class RoutineScriptScene2 : MonoBehaviour
     {
         WindowPrefab.GetComponent<SpriteRenderer>().sprite = mapsSprite;
         Window = Instantiate(WindowPrefab, DummyWindowPosition.position, DummyWindowPosition.rotation);
+        Window.GetComponent<Renderer>().sortingOrder = 25;
         Destroy(Window, 3f);
         Invoke("NextStep", 0.5f);
     }
