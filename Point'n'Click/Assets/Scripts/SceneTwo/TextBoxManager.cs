@@ -24,6 +24,7 @@ public class TextBoxManager : MonoBehaviour
     public PlayerController player;
 
     public bool isActivated;
+    public float speedTextDefil;
 
     private void Awake()
     {
@@ -150,7 +151,7 @@ public class TextBoxManager : MonoBehaviour
     {
         if(isActivated)
         {
-            yield return new WaitForSeconds(3f);
+            yield return new WaitForSeconds(speedTextDefil);
             currentLine++;
             StartCoroutine("TextCoroutine");
         }
