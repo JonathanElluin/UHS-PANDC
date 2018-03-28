@@ -87,10 +87,13 @@ public class SceneOneManager : MonoBehaviour
                     Vildrac.GetComponent<SpriteRenderer>().material.color = new Color(1.0f, 1.0f, 1.0f, Alpha);
                     if (Alpha <= 0)
                     {
-                        Destroy(gameObject);
+
+                        Player_controller.startMovingLeft = false;
+                        Player_controller.startMovingRight = false;
                         PlayerPrefs.SetInt("ChoiceScene1",isAlcolo ? 0 : 1);
                         PlayerPrefs.SetInt("SceneToLoad", 2);
-                        Application.Quit();
+                        Destroy(Vildrac);
+                        SceneManager.LoadScene(1);
                     }
                 }
             }

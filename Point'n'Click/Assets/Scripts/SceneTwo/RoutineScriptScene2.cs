@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Threading;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class RoutineScriptScene2 : MonoBehaviour
 {
@@ -24,6 +25,7 @@ public class RoutineScriptScene2 : MonoBehaviour
     public Transform DummyWindowPosition;
     public Transform DummyWomanStopPosition;
     public GameObject WindowPrefab;
+    public GameObject soupconneText;
 
     public GameObject mapsPrefab;
     public GameObject demineurPrefab;
@@ -201,6 +203,7 @@ public class RoutineScriptScene2 : MonoBehaviour
 
     public void InitChoices()
     {
+        soupconneText.SetActive(true);
         Cursor.SetActive(true);
         Choices.SetActive(true);
 

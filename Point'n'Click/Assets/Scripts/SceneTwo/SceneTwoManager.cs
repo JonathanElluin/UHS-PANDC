@@ -37,7 +37,11 @@ public class SceneTwoManager : MonoBehaviour {
         }
         return instance;
     }
-
+    private void Awake()
+    {
+        Player_controller.startMovingLeft = false;
+        Player_controller.startMovingRight = false;
+    }
 
     // Use this for initialization
     void Start()

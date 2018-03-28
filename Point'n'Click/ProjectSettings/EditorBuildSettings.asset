@@ -9,7 +9,7 @@ EditorBuildSettings:
     path: Assets/Levels/Loader.unity
     guid: 8fd5b8817c2b00244988bd6047e049ae
   - enabled: 1
-    path: Assets/Levels/Marchy.unity
+    path: Assets/Levels/Choix_Caractere.unity
     guid: ce3b98c13fb765141bd38f4df365b7c8
   - enabled: 1
     path: Assets/Levels/StorySelect3.unity

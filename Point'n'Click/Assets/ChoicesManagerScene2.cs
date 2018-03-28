@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TestScript : MonoBehaviour {
+public class ChoicesManagerScene2 : MonoBehaviour {
 
     private SpriteRenderer spriteRenderer;
     private Color spriteColor;
@@ -13,17 +13,23 @@ public class TestScript : MonoBehaviour {
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
-    { 
-        spriteRenderer.color = new Color(spriteRenderer.color.r, spriteRenderer.color.g, spriteRenderer.color.b, 0);
+    {
+        spriteRenderer.color = new Color(spriteRenderer.color.r, spriteRenderer.color.g, spriteRenderer.color.b, 0.5f);
     }
 
-    private void OnTriggerExit(Collider other)
+    private void OnTriggerExit2D(Collider2D other)
     {
-        //spriteRenderer.color = new Color(spriteRenderer.color.r, spriteRenderer.color.g, spriteRenderer.color.b, 255);
+
+        spriteRenderer.color = new Color(spriteRenderer.color.r, spriteRenderer.color.g, spriteRenderer.color.b, 1);
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
         Debug.Log("NIQUE BIEN TA MERE COLIDER");
     }
+
+	// Update is called once per frame
+	void Update () {
+		
+	}
 }
