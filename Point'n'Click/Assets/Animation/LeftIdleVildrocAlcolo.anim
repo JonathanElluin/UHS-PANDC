@@ -5,7 +5,7 @@ AnimationClip:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: Idle_vildrac_alcolo
+  m_Name: LeftIdleVildrocAlcolo
   serializedVersion: 6
   m_Legacy: 0
   m_Compressed: 0
@@ -18,8 +18,8 @@ AnimationClip:
   m_FloatCurves: []
   m_PPtrCurves:
   - curve:
-    - time: 1
-      value: {fileID: 21300002, guid: 3f50902ae8871564ba8967898e9eb7f5, type: 3}
+    - time: 0
+      value: {fileID: 21300050, guid: 52f30ee44752e26458a404d40375cc31, type: 3}
     attribute: m_Sprite
     path: 
     classID: 212
@@ -39,13 +39,13 @@ AnimationClip:
       customType: 23
       isPPtrCurve: 1
     pptrCurveMapping:
-    - {fileID: 21300002, guid: 3f50902ae8871564ba8967898e9eb7f5, type: 3}
+    - {fileID: 21300050, guid: 52f30ee44752e26458a404d40375cc31, type: 3}
   m_AnimationClipSettings:
     serializedVersion: 2
     m_AdditiveReferencePoseClip: {fileID: 0}
     m_AdditiveReferencePoseTime: 0
     m_StartTime: 0
-    m_StopTime: 2
+    m_StopTime: 1
     m_OrientationOffsetY: 0
     m_Level: 0
     m_CycleOffset: 0

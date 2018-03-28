@@ -17,6 +17,7 @@ public class SpriteClickScript : MonoBehaviour {
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        Debug.Log("coucou");
         curseurPresent = true;
         this.collision = collision.gameObject;
     }
