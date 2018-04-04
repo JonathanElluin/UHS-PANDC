@@ -6,6 +6,8 @@ TagManager:
   tags:
   - Cursor
   - ChoiceNumber
+  - Choix1
+  - Choix2
   layers:
   - Default
   - TransparentFX

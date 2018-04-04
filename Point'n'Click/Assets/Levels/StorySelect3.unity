@@ -304,7 +304,17 @@ Prefab:
     - target: {fileID: 114382796079903328, guid: 857659e64c61479458deff6ed0f0751b,
         type: 2}
       propertyPath: textFilesColere.Array.size
-      value: 5
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 114382796079903328, guid: 857659e64c61479458deff6ed0f0751b,
+        type: 2}
+      propertyPath: textFilesChoix3.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 114382796079903328, guid: 857659e64c61479458deff6ed0f0751b,
+        type: 2}
+      propertyPath: textFilesChoix1_2.Array.size
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 4087034027475600, guid: 857659e64c61479458deff6ed0f0751b, type: 2}
       propertyPath: m_LocalPosition.x
@@ -392,7 +402,7 @@ Prefab:
         type: 2}
       propertyPath: textFilesColere.Array.data[3]
       value: 
-      objectReference: {fileID: 4900000, guid: 7b9708c841f58a942a3095e2fab750c6, type: 3}
+      objectReference: {fileID: 4900000, guid: f2c4dcc4f76aaec4b8fbb366554d68ed, type: 3}
     - target: {fileID: 114382796079903328, guid: 857659e64c61479458deff6ed0f0751b,
         type: 2}
       propertyPath: textFilesColere.Array.data[4]
@@ -541,7 +551,7 @@ Prefab:
     - target: {fileID: 114382796079903328, guid: 857659e64c61479458deff6ed0f0751b,
         type: 2}
       propertyPath: speedTextDefil
-      value: 3.14
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 114382796079903328, guid: 857659e64c61479458deff6ed0f0751b,
         type: 2}
@@ -558,6 +568,46 @@ Prefab:
       propertyPath: isActivated
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 114382796079903328, guid: 857659e64c61479458deff6ed0f0751b,
+        type: 2}
+      propertyPath: textFilesChoix1_2.Array.data[0]
+      value: 
+      objectReference: {fileID: 4900000, guid: 072652e4aa9aef649af6de19bfe2a7fc, type: 3}
+    - target: {fileID: 114382796079903328, guid: 857659e64c61479458deff6ed0f0751b,
+        type: 2}
+      propertyPath: textFilesChoix1_2.Array.data[1]
+      value: 
+      objectReference: {fileID: 4900000, guid: 12ae78abf154961408236aaf55c532fd, type: 3}
+    - target: {fileID: 114382796079903328, guid: 857659e64c61479458deff6ed0f0751b,
+        type: 2}
+      propertyPath: textFilesChoix1_2.Array.data[2]
+      value: 
+      objectReference: {fileID: 4900000, guid: fdc038888f50bfb4fb5b5842e4a5a51d, type: 3}
+    - target: {fileID: 114382796079903328, guid: 857659e64c61479458deff6ed0f0751b,
+        type: 2}
+      propertyPath: textFilesChoix1_2.Array.data[3]
+      value: 
+      objectReference: {fileID: 4900000, guid: 5af0daa3d43582c4ba4aaffb29de646e, type: 3}
+    - target: {fileID: 114382796079903328, guid: 857659e64c61479458deff6ed0f0751b,
+        type: 2}
+      propertyPath: textFilesChoix1_2.Array.data[4]
+      value: 
+      objectReference: {fileID: 4900000, guid: 8d87f2b616d4b9349a87f3d347cbd48a, type: 3}
+    - target: {fileID: 114382796079903328, guid: 857659e64c61479458deff6ed0f0751b,
+        type: 2}
+      propertyPath: textFilesChoix3.Array.data[0]
+      value: 
+      objectReference: {fileID: 4900000, guid: 78d8aebe94a818744b2ce3f5f130572b, type: 3}
+    - target: {fileID: 114382796079903328, guid: 857659e64c61479458deff6ed0f0751b,
+        type: 2}
+      propertyPath: textFilesChoix3.Array.data[1]
+      value: 
+      objectReference: {fileID: 4900000, guid: fdc038888f50bfb4fb5b5842e4a5a51d, type: 3}
+    - target: {fileID: 114382796079903328, guid: 857659e64c61479458deff6ed0f0751b,
+        type: 2}
+      propertyPath: textFilesChoix3.Array.data[2]
+      value: 
+      objectReference: {fileID: 4900000, guid: 5af0daa3d43582c4ba4aaffb29de646e, type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 857659e64c61479458deff6ed0f0751b, type: 2}
   m_IsPrefabParent: 0
@@ -1317,9 +1367,10 @@ GameObject:
   - component: {fileID: 1160714353}
   - component: {fileID: 1160714351}
   - component: {fileID: 1160714352}
+  - component: {fileID: 1160714350}
   m_Layer: 0
   m_Name: Choix1
-  m_TagString: Untagged
+  m_TagString: Choix1
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1337,6 +1388,17 @@ Transform:
   m_Father: {fileID: 730913979}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1160714350
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1160714348}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 51619acb86e81bb43b6892195a149c12, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!61 &1160714351
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1679,7 +1741,7 @@ GameObject:
   - component: {fileID: 1527864634}
   m_Layer: 0
   m_Name: Choix2
-  m_TagString: Untagged
+  m_TagString: Choix1
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1851,11 +1913,11 @@ GameObject:
   - component: {fileID: 1589462606}
   - component: {fileID: 1589462610}
   - component: {fileID: 1589462608}
-  - component: {fileID: 1589462607}
   - component: {fileID: 1589462609}
+  - component: {fileID: 1589462607}
   m_Layer: 0
   m_Name: Choix3
-  m_TagString: Untagged
+  m_TagString: Choix2
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1881,7 +1943,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1589462605}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2531cf86bacb0f34ca12350efccf25d5, type: 3}
+  m_Script: {fileID: 11500000, guid: 51619acb86e81bb43b6892195a149c12, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!61 &1589462608
@@ -2048,7 +2110,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1599515115}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 367.5, y: 149.5, z: 0}
+  m_LocalPosition: {x: 442, y: 211, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 422837188}
@@ -2146,7 +2208,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 2096964023}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 100.763, z: 0}
+  m_LocalPosition: {x: 0, y: 142.214, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1599515119}

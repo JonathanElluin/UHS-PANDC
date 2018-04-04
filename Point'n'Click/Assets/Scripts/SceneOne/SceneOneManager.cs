@@ -6,6 +6,7 @@ public class SceneOneManager : MonoBehaviour
 {
 
     private SpriteRenderer VildracSpriteRenderer;
+    private AudioSource BackgroundMusicAudioSource;
     public GameObject Background;
     public GameObject ChoixText;
     private Animator CouloirAnimator;
@@ -44,6 +45,7 @@ public class SceneOneManager : MonoBehaviour
     // Use this for initialization
     void Start()
     {
+        BackgroundMusicAudioSource = GetComponent<AudioSource>();
         VildracSpriteRenderer = Vildrac.GetComponent<SpriteRenderer>();
         VildracAnimator = Vildrac.GetComponent<Animator>();
         CouloirAnimator = Background.GetComponent<Animator>();
@@ -51,6 +53,7 @@ public class SceneOneManager : MonoBehaviour
         CouloirAnimator.SetBool("isOpen", true);
         VildracAnimator.SetBool("isColere", false);
         VildracAnimator.SetBool("isAlcolo", false);
+        BackgroundMusicAudioSource.Play();
     }
 
     public void Update()

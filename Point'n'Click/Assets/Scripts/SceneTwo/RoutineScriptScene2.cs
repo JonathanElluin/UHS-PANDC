@@ -42,17 +42,17 @@ public class RoutineScriptScene2 : MonoBehaviour
     private float AlphaWoman;
     private SpriteRenderer windowSpriteRenderer;
     private bool isColerique;
+    private bool isChoice = false;
 
     public Transform DummyVildracAlcoloSpawn;
     public Transform DummyVildracColereSpawn;
     public GameObject vildracPrefab;
+    private int Choice = 0;
 
     // Use this for initialization
 
     void Start()
     {
-
-
         BureauAnimator = Background.GetComponent<Animator>();
         CursorRenderer = Cursor.GetComponent<SpriteRenderer>();
         Cursor.SetActive(false);
@@ -62,6 +62,20 @@ public class RoutineScriptScene2 : MonoBehaviour
         InitSprites();
         PlayStep(0);
         // PlayerPrefs.DeleteAll();
+    }
+
+    private void Update()
+    {
+        if(isChoice)
+        {
+            if(Input.GetKeyDown(KeyCode.Space)){
+                if (ChoicesManagerScene2.Choice != 0)
+                {
+                    Choice = ChoicesManagerScene2.Choice;
+                    DeleteChoices();
+                }
+            }
+        }
     }
 
     public void InitPositions()
@@ -203,10 +217,81 @@ public class RoutineScriptScene2 : MonoBehaviour
 
     public void InitChoices()
     {
+        isChoice = true;
         soupconneText.SetActive(true);
         Cursor.SetActive(true);
         Choices.SetActive(true);
+    }
 
+    public void DeleteChoices()
+    {
+        isChoice = false;
+        soupconneText.SetActive(false);
+        Cursor.SetActive(false);
+        Choices.SetActive(false);
+        StartStepAfterChoice();
+    }
+
+    public void Step9()
+    {
+        switch (Choice)
+        {
+            case 1:
+                myDialogManager.EnableTextBoxWithNextStep();
+
+                break;
+            case 2:
+                myDialogManager.EnableTextBoxWithNextStep();
+                break;
+            default:
+                break;
+        }
+    }
+
+    public void Step10()
+    {
+        Window = Instantiate(mapsPrefab, DummyWindowPosition.position, DummyWindowPosition.rotation);
+        Window.GetComponent<Renderer>().sortingOrder = 25;
+        Invoke("NextStep", 2f);
+    }
+
+    public void Step11()
+    {
+        if(Choice == 1)
+        {
+            myDialogManager.EnableTextBoxWithNextStep();
+        }
+        else
+        {
+            myDialogManager.EnableTextBoxWithNextStep();
+        }
+    }
+
+    public void Step12()
+    {
+        myDialogManager.EnableTextBoxWithNextStep();
+    }
+
+    public void Step13()
+    {
+        Window = Instantiate(demineurPrefab, DummyWindowPosition.position, DummyWindowPosition.rotation);
+        Window.GetComponent<Renderer>().sortingOrder = 27;
+        myDialogManager.EnableTextBox();
+    }
+
+    public void StartStepAfterChoice()
+    {
+        if(Choice == 1)
+        {
+            myDialogManager.isChoice1_2 = true;
+            myDialogManager.AddChoicesText();
+        }
+        else
+        {
+            myDialogManager.isChoice1_2 = false;
+            myDialogManager.AddChoicesText();
+        }
+        NextStep();
     }
 
     public void NextStep()
@@ -242,6 +327,21 @@ public class RoutineScriptScene2 : MonoBehaviour
                 break;
             case 8:
                 Step8();
+                break;
+            case 9:
+                Step9();
+                break;
+            case 10:
+                Step10();
+                break;
+            case 11:
+                Step11();
+                break;
+            case 12:
+                Step12();
+                break;
+            case 13:
+                Step13();
                 break;
             default:
                 Step0();

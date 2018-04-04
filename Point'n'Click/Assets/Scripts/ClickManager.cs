@@ -10,6 +10,7 @@ public class ClickManager : MonoBehaviour
     private SpriteRenderer spriteRenderer0;
     public Sprite sprite1; //sprite qui change en fonction du choix 
     private SpriteRenderer spriteRenderer1;
+    private AudioSource ChoiceSound;
 
     public GameObject VildracSprite;
     private Animator VildracAnimator;

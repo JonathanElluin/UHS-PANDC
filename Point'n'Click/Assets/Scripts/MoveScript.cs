@@ -4,6 +4,7 @@ using System.Collections;
 public class MoveScript : MonoBehaviour
 {
 
+    public AudioSource myAudioSource;
     public float Speed;
 
     // Update is called once per frame

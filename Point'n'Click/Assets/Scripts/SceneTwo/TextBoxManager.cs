@@ -11,7 +11,11 @@ public class TextBoxManager : MonoBehaviour
 
     public TextAsset[] textFilesAlcolo;
     public TextAsset[] textFilesColere;
+    public TextAsset[] textFilesChoix1_2;
+    public TextAsset[] textFilesChoix3;
     public RoutineScriptScene2 manager;
+    
+    public bool isChoice1_2;
 
     private List<TextAsset> textFiles = new List<TextAsset>();
     private int currentTextFile = 0;
@@ -53,7 +57,6 @@ public class TextBoxManager : MonoBehaviour
                 foreach (var t in textFilesColere)
                 {
                     textFiles.Add(t);
-
                 }
                 break;
             default:
@@ -66,6 +69,8 @@ public class TextBoxManager : MonoBehaviour
 
     void Update()
     {
+       
+
         if (currentLine < textLines.Length)
         {
             theText.text = textLines[currentLine];
@@ -78,6 +83,25 @@ public class TextBoxManager : MonoBehaviour
             Setup();
             DisableTextBox();
         }
+    }
+
+    public void AddChoicesText()
+    {
+        if (isChoice1_2)
+        {
+            foreach(var t in textFilesChoix1_2)
+            {
+                textFiles.Add(t);
+            }
+        }
+        else
+        {
+            foreach (var t in textFilesChoix3)
+            {
+                textFiles.Add(t);
+            }
+        }
+        Setup();
     }
 
     private void ResetValues()
@@ -102,8 +126,7 @@ public class TextBoxManager : MonoBehaviour
         }
         else
         {
-            Destroy(textBox);
-            Destroy(gameObject);
+            DisableTextBox();
         }
 
     }
