@@ -93,10 +93,14 @@ public class SceneOneManager : MonoBehaviour
 
                         Player_controller.startMovingLeft = false;
                         Player_controller.startMovingRight = false;
-                        PlayerPrefs.SetInt("ChoiceScene1",isAlcolo ? 0 : 1);
+                        //Debug.Log("alcoolique?" + isAlcolo);
+                        int choix = isAlcolo ? 0 : 1;
+                        //Debug.Log(choix);
+                        PlayerPrefs.SetInt("ChoiceScene1",choix);
                         PlayerPrefs.SetInt("SceneToLoad", 2);
                         Destroy(Vildrac);
-                        SceneManager.LoadScene(1);
+                        Application.Quit();
+                        //SceneManager.LoadScene(1);
                     }
                 }
             }

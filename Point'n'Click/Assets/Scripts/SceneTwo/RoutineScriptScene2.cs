@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Threading;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class RoutineScriptScene2 : MonoBehaviour
@@ -94,7 +95,10 @@ public class RoutineScriptScene2 : MonoBehaviour
     public void InitSprites()
     {
         windowSpriteRenderer = WindowPrefab.GetComponent<SpriteRenderer>();
-        switch (PlayerPrefs.GetInt("ChoiceScene1", 0))
+        Debug.Log("choix de scene = "+PlayerPrefs.GetInt("ChoiceScene1", 0));
+        //choix 0 Alcoolique
+        //choix 1 colerique
+        switch (PlayerPrefs.GetInt("ChoiceScene1", 1))
         {
             case 0:
                 Vildrac = Instantiate(vildracPrefab, DummyVildracAlcoloSpawn.position, DummyVildracAlcoloSpawn.rotation);
