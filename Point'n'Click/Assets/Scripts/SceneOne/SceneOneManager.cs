@@ -1,14 +1,18 @@
 ﻿using Assets.Scripts;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class SceneOneManager : MonoBehaviour
 {
 
     private SpriteRenderer VildracSpriteRenderer;
     private AudioSource BackgroundMusicAudioSource;
+    public int countChoice;
     public GameObject Background;
-    public GameObject ChoixText;
+    public Text ChoixText;
+    public Text textCountDown;
     private Animator CouloirAnimator;
     private float Alpha;
 
@@ -25,6 +29,7 @@ public class SceneOneManager : MonoBehaviour
 
     private bool isAlcolo = false;
     private bool isColere = false;
+    private bool hasCoroutineCountStarted = false;
 
     private bool isStart = true;
 
@@ -93,7 +98,7 @@ public class SceneOneManager : MonoBehaviour
 
                         Player_controller.startMovingLeft = false;
                         Player_controller.startMovingRight = false;
-                        PlayerPrefs.SetInt("ChoiceScene1",isAlcolo ? 0 : 1);
+                        PlayerPrefs.SetInt("ChoiceScene1", isAlcolo ? 0 : 1);
                         PlayerPrefs.SetInt("SceneToLoad", 2);
                         Destroy(Vildrac);
                         SceneManager.LoadScene(1);
@@ -105,12 +110,21 @@ public class SceneOneManager : MonoBehaviour
 
     private void SetChoiceActive()
     {
-        Cursor.SetActive(true);
-        VildracColere.SetActive(true);
-        ChoixText.SetActive(true);
-        VildracAlcolo.SetActive(true);
-        Vildrac.SetActive(false);
-        isStart = false;
+        if (Time.timeSinceLevelLoad >= 5f && !hasCoroutineCountStarted)
+        {
+            textCountDown.gameObject.SetActive(true);
+
+            hasCoroutineCountStarted = true;
+            textCountDown.text = countChoice.ToString();
+            StartCoroutine("countDownRoutine");
+
+            BackgroundMusicAudioSource.volume = 0.1f;
+            Cursor.SetActive(true);
+            VildracColere.SetActive(true);
+            VildracAlcolo.SetActive(true);
+            Vildrac.SetActive(false);
+            isStart = false;
+        }
     }
 
     public void SetChoice()
@@ -132,6 +146,8 @@ public class SceneOneManager : MonoBehaviour
 
     private void UnsetChoiceActive()
     {
+        textCountDown.gameObject.SetActive(false);
+        StopCoroutine("countDownRoutine");
         Destroy(Cursor.gameObject);
         Destroy(VildracAlcolo.gameObject);
         Destroy(VildracColere.gameObject);
@@ -157,5 +173,22 @@ public class SceneOneManager : MonoBehaviour
             Vildrac.GetComponent<SpriteRenderer>().material.color = new Color(1.0f, 1.0f, 1.0f, Alpha);
         }
         Alpha = 1;
+    }
+
+    public IEnumerator countDownRoutine()
+    {
+        while (countChoice > 0)
+        {
+            yield return new WaitForSeconds(1);
+            countChoice--;
+            textCountDown.text = countChoice.ToString();
+        }
+
+        int randomChoice = Random.Range(1, 1000);
+        randomChoice = (randomChoice % 2) + 1;
+        SharedObjects.SetInt(CHOICEKEY, randomChoice);
+        SetChoice();
+        UnsetChoiceActive();
+
     }
 }

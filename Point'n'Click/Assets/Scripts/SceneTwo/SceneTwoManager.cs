@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SceneTwoManager : MonoBehaviour {
+public class SceneTwoManager : MonoBehaviour
+{
 
     private SpriteRenderer VildracSpriteRenderer;
     public GameObject Background;
@@ -77,7 +78,7 @@ public class SceneTwoManager : MonoBehaviour {
                 Player_controller.startMovingLeft = false;
                 Player_controller.isIddle = true;
                 textBoxManager.EnableTextBox();
-           //   Invoke("SetChoiceActive", 0.5f);
+                //   Invoke("SetChoiceActive", 0.5f);
             }
 
             //if (textBoxManager.currentLine == textBoxManager.endAtLine)
@@ -116,11 +117,11 @@ public class SceneTwoManager : MonoBehaviour {
 
     public void SetChoice()
     {
-        
+
 
     }
 
-        private void UnsetChoiceActive()
+    private void UnsetChoiceActive()
     {
         Destroy(Cursor.gameObject);
         Destroy(VildracAlcolo.gameObject);

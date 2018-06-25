@@ -12,6 +12,7 @@ public class SpriteClickScript : MonoBehaviour {
         if (Input.GetKeyDown(KeyCode.Space) && curseurPresent == true)  //Appui sur Espace
         {
             SetCollider();
+            GetComponent<AudioSource>().Play();
         }
     }
 
@@ -38,11 +39,6 @@ public class SpriteClickScript : MonoBehaviour {
             case "Choix 2":
                 {
                     SharedObjects.SetInt(SceneOneManager.CHOICEKEY, 2);
-                    break;
-                }
-            case "Choix 3":
-                {
-                    SharedObjects.SetInt(SceneOneManager.CHOICEKEY, 3);
                     break;
                 }
             default:

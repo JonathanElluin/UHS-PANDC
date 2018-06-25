@@ -28,6 +28,19 @@ public class ChoicesManagerScene2 : MonoBehaviour {
         spriteRenderer.color = new Color(spriteRenderer.color.r, spriteRenderer.color.g, spriteRenderer.color.b, 0.5f);
     }
 
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        if (gameObject.CompareTag("Choix1"))
+        {
+            Choice = 1;
+        }
+        if (gameObject.CompareTag("Choix2"))
+        {
+            Choice = 2;
+        }
+        spriteRenderer.color = new Color(spriteRenderer.color.r, spriteRenderer.color.g, spriteRenderer.color.b, 0.5f);
+    }
+
     private void OnTriggerExit2D(Collider2D other)
     {
         Choice = 0;

@@ -18,7 +18,7 @@ public class TextBoxManager : MonoBehaviour
     public bool isChoice1_2;
 
     private List<TextAsset> textFiles = new List<TextAsset>();
-    private int currentTextFile = 0;
+    public int currentTextFile = 0;
     public string[] textLines;
 
     private int currentLine = 0;
@@ -143,6 +143,18 @@ public class TextBoxManager : MonoBehaviour
 
     }
 
+    public void EnableTextBoxSTD(float std)
+    {
+        if (textBox != null)
+        {
+            isActivated = true;
+            StartCoroutine("TextCorutineWithSpeedTextDefil", std);
+            textBox.SetActive(true);
+            isWithNextStep = false;
+        }
+
+    }
+
     public void EnableTextBoxWithNextStep()
     {
         if (textBox != null)
@@ -157,6 +169,7 @@ public class TextBoxManager : MonoBehaviour
     public void DisableTextBox()
     {
         StopCoroutine("TextCoroutine");
+        StopCoroutine("TextCorutineWithSpeedTextDefil");
         isActivated = false;
         textBox.SetActive(false);
         if (isWithNextStep)
@@ -177,6 +190,16 @@ public class TextBoxManager : MonoBehaviour
             yield return new WaitForSeconds(speedTextDefil);
             currentLine++;
             StartCoroutine("TextCoroutine");
+        }
+    }
+
+    public IEnumerator TextCorutineWithSpeedTextDefil(float std)
+    {
+        if (isActivated)
+        {
+            yield return new WaitForSeconds(std);
+            currentLine++;
+            StartCoroutine("TextCorutineWithSpeedTextDefil",std);
         }
     }
 

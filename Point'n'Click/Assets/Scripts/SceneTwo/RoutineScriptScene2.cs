@@ -129,12 +129,12 @@ public class RoutineScriptScene2 : MonoBehaviour
             Window = Instantiate(demineurPrefab, DummyWindowPosition.position, DummyWindowPosition.rotation);
             Window.GetComponent<Renderer>().sortingOrder = 25;
             Destroy(Window, 3f);
-            Invoke("NextStep", 1f);
+            Invoke("NextStep", 0.5f);
         }
         else
         {
             TocTocParticle = Instantiate(TocTocParticlePrefab, DummyParticlePosition.position, DummyParticlePosition.rotation);
-            Invoke("NextStep", 2f);
+            Invoke("NextStep", 0.5f);
         }
 
     }
@@ -143,9 +143,9 @@ public class RoutineScriptScene2 : MonoBehaviour
     {
         if (isColerique)
         {
-            myDialogManager.EnableTextBox();
+            myDialogManager.EnableTextBoxSTD(3f);
             TocTocParticle = Instantiate(TocTocParticlePrefab, DummyParticlePosition.position, DummyParticlePosition.rotation);
-            Invoke("NextStep", myDialogManager.speedTextDefil * myDialogManager.textLines.Length + 2f);
+            Invoke("NextStep", 6f);
         }
         else
         {
@@ -157,14 +157,15 @@ public class RoutineScriptScene2 : MonoBehaviour
 
     public void Step3()
     {
+       
         if (isColerique)
         {
-            myDialogManager.EnableTextBoxWithNextStep();
+            NextStep();
         }
         else
         {
             TocTocParticle = Instantiate(TocTocParticlePrefab, DummyParticlePosition.position, DummyParticlePosition.rotation);
-            Invoke("StepAlcolique", 1.5f);
+            Invoke("StepAlcolique", 0.5f);
         }
         
     }
@@ -206,8 +207,7 @@ public class RoutineScriptScene2 : MonoBehaviour
 
     public void Step7()
     {
-        myDialogManager.EnableTextBox();
-        Invoke("NextStep", myDialogManager.speedTextDefil);
+        myDialogManager.EnableTextBoxWithNextStep();
     }
 
     public void Step8()
@@ -237,11 +237,13 @@ public class RoutineScriptScene2 : MonoBehaviour
         switch (Choice)
         {
             case 1:
-                myDialogManager.EnableTextBoxWithNextStep();
+                myDialogManager.EnableTextBox();
+                Invoke("NextStep", 5f);
 
                 break;
             case 2:
-                myDialogManager.EnableTextBoxWithNextStep();
+                myDialogManager.EnableTextBox();
+                Invoke("NextStep",5f);
                 break;
             default:
                 break;
