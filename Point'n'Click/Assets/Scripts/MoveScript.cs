@@ -9,22 +9,92 @@ public class MoveScript : MonoBehaviour
 {
     static int debug_idx = 0;
     string valeur = "";
+    private Firebase firebase;
+    Firebase lastUpdate;
+    Firebase value;
+    private String currentValue;
+
+    public Transform MaxLeft;
+    public Transform MaxRight;
+    public Transform MaxTop;
+    public Transform MaxBot;
 
     [SerializeField]
     TextMesh textMesh;
     public AudioSource myAudioSource;
     public float Speed;
 
+    private void Awake()
+    {
+        firebase = Firebase.CreateNew("https://uhs-api-v2.firebaseio.com/Lyon/", "hTdDHZdWprOR0MyMuPa1ikI2QG3jUF4yNqdC63M9");
+        // Init callbacks
+        firebase.OnGetSuccess += GetOKHandler;
+        firebase.OnGetFailed += GetFailHandler;
+
+        // un obeserveur sur la date
+        lastUpdate = firebase.Child("bouton/date");
+        //un observer sur la touche
+        value = firebase.Child("bouton/value");
+        /*--------------------------------------------------------------*/
+        // observer sur "last update" time stamp
+        FirebaseObserver observerButton = new FirebaseObserver(value, 0.0001f);
+        observerButton.OnChange += (Firebase sender, DataSnapshot snapshot) =>
+        {
+            valeur = snapshot.Value<string>();
+            DebugLog(valeur);
+        };
+        observerButton.Start();
+        /*--------------------------------------------------------------*/
+        // observer sur "last update" time stamp
+        FirebaseObserver observerTime = new FirebaseObserver(lastUpdate, 0.0001f);
+        observerTime.OnChange += (Firebase sender, DataSnapshot snapshot) =>
+        {
+            //OnKeydown();
+            currentValue = valeur;
+        };
+        observerTime.Start();
+    }
+
     // Use this for initialization
     void Start()
     {
-        StartCoroutine(Tests());
+        //StartCoroutine(Tests());
     }
 
     // Update is called once per frame
     void Update()
     {
         //StartCoroutine(Tests());
+        // un obeserveur sur la date
+        lastUpdate = firebase.Child("bouton/date");
+        //un observer sur la touche
+        value = firebase.Child("bouton/value");
+
+        if (currentValue == "droite" && transform.position.x < MaxRight.position.x) //droite
+        {
+            transform.Translate(Vector2.right * Speed * Time.deltaTime);
+        }
+
+        if (currentValue == "gauche" && transform.position.x > MaxLeft.position.x) //gauche
+        {
+            transform.Translate(Vector2.left * Speed * Time.deltaTime);
+        }
+
+        if (currentValue == "haut" && transform.position.y < MaxTop.position.y)  //haut
+        {
+            transform.Translate(Vector2.up * Speed * Time.deltaTime);
+        }
+
+        if (currentValue == "bas" && transform.position.y > MaxBot.position.y)  //bas
+        {
+            transform.Translate(Vector2.down * Speed * Time.deltaTime);
+        }
+
+        if(currentValue == "none")
+        {
+            transform.position = transform.position;
+        }
+
         //Movement();
     }
 
@@ -54,54 +124,10 @@ public class MoveScript : MonoBehaviour
 
     IEnumerator Tests()
     {
-        Firebase firebase = Firebase.CreateNew("https://uhs-api-v2.firebaseio.com/Lyon/", "hTdDHZdWprOR0MyMuPa1ikI2QG3jUF4yNqdC63M9");
-        // Init callbacks
-        firebase.OnGetSuccess += GetOKHandler;
-        firebase.OnGetFailed += GetFailHandler;
+      
         /*--------------------------------------------------------------*/
-        // un obeserveur sur la date
-        Firebase lastUpdate = firebase.Child("bouton/date");
-        //un observer sur la touche
-        Firebase value = firebase.Child("bouton/value");
-        /*--------------------------------------------------------------*/
-        // observer sur "last update" time stamp
-        FirebaseObserver observerButton = new FirebaseObserver(value, 0.01f);
-        observerButton.OnChange += (Firebase sender, DataSnapshot snapshot) =>
-        {
-            valeur = snapshot.Value<string>();
-            DebugLog(valeur);
-        };
-        observerButton.Start();
-        DebugLog("[OBSERVER] sur le champ button " + value.FullKey + "!");
-        /*--------------------------------------------------------------*/
-        // observer sur "last update" time stamp
-        FirebaseObserver observerTime = new FirebaseObserver(lastUpdate, 0.01f);
-        observerTime.OnChange += (Firebase sender, DataSnapshot snapshot) =>
-        {
-            DebugLog("valeur press par le joueur :" + valeur);
-            //OnKeydown();
-            if (valeur == "droite") //droite
-            {
-                transform.Translate(Vector2.right * Speed * Time.deltaTime);
-            }
-
-            if (valeur == "gauche") //gauche
-            {
-                transform.Translate(Vector2.left * Speed * Time.deltaTime);
-            }
-
-            if (valeur == "haut")  //haut
-            {
-                transform.Translate(Vector2.up * Speed * Time.deltaTime);
-            }
-
-            if (valeur == "base")  //bas
-            {
-                transform.Translate(Vector2.down * Speed * Time.deltaTime);
-            }
-        };
-        observerTime.Start();
-        DebugLog("[OBSERVER] sur le timetamps " + lastUpdate.FullKey + "!");
+        
+       // DebugLog("[OBSERVER] sur le timetamps " + lastUpdate.FullKey + "!");
         /*--------------------------------------------------------------*/
         yield return null;
         //observer.Stop();

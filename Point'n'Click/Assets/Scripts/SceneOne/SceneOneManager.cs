@@ -10,9 +10,11 @@ public class SceneOneManager : MonoBehaviour
     private SpriteRenderer VildracSpriteRenderer;
     private AudioSource BackgroundMusicAudioSource;
     public int countChoice;
+    public int countReflexion;
     public GameObject Background;
     public Text ChoixText;
     public Text textCountDown;
+    public Text Reflexion;
     private Animator CouloirAnimator;
     private float Alpha;
 
@@ -30,6 +32,7 @@ public class SceneOneManager : MonoBehaviour
     private bool isAlcolo = false;
     private bool isColere = false;
     private bool hasCoroutineCountStarted = false;
+    private bool hasCoroutineReflexionStrated = false;
 
     private bool isStart = true;
 
@@ -89,7 +92,7 @@ public class SceneOneManager : MonoBehaviour
             if (!isStart)
             {
                 Player_controller.startMovingLeft = true;
-                if (Vildrac.transform.position.x <= DummyEndPosition.transform.position.x)
+                if (Vildrac != null && Vildrac.transform.position.x <= DummyEndPosition.transform.position.x)
                 {
                     Alpha -= 0.05f;
                     Vildrac.GetComponent<SpriteRenderer>().material.color = new Color(1.0f, 1.0f, 1.0f, Alpha);
@@ -104,7 +107,9 @@ public class SceneOneManager : MonoBehaviour
                         PlayerPrefs.SetInt("ChoiceScene1",choix);
                         PlayerPrefs.SetInt("SceneToLoad", 2);
                         Destroy(Vildrac);
-                        Application.Quit();
+                        ChoixText.gameObject.SetActive(true);
+                        ChoixText.text = "Un élément s'est caché essayez de le retrouver !";
+                        Cursor.SetActive(true);
                         //SceneManager.LoadScene(1);
                     }
                 }
@@ -112,18 +117,20 @@ public class SceneOneManager : MonoBehaviour
         }
     }
 
+
     private void SetChoiceActive()
     {
-        if (Time.timeSinceLevelLoad >= 5f && !hasCoroutineCountStarted)
+        if (Time.timeSinceLevelLoad >= 5f && !hasCoroutineReflexionStrated)
         {
+            Debug.Log("Time after walk: " + Time.timeSinceLevelLoad);
             textCountDown.gameObject.SetActive(true);
-
-            hasCoroutineCountStarted = true;
-            textCountDown.text = countChoice.ToString();
-            StartCoroutine("countDownRoutine");
+            ChoixText.gameObject.SetActive(true);
+            hasCoroutineReflexionStrated = true;
+            textCountDown.text = countReflexion.ToString();
+            StartCoroutine("countDownRoutine", countReflexion);
 
             BackgroundMusicAudioSource.volume = 0.1f;
-            Cursor.SetActive(true);
+            //Cursor.SetActive(true);
             VildracColere.SetActive(true);
             VildracAlcolo.SetActive(true);
             Vildrac.SetActive(false);
@@ -152,10 +159,10 @@ public class SceneOneManager : MonoBehaviour
     {
         textCountDown.gameObject.SetActive(false);
         StopCoroutine("countDownRoutine");
-        Destroy(Cursor.gameObject);
+        Cursor.SetActive(false);
         Destroy(VildracAlcolo.gameObject);
         Destroy(VildracColere.gameObject);
-        Destroy(ChoixText);
+        ChoixText.gameObject.SetActive(false);
         Vildrac.SetActive(true);
         VildracAnimator.SetInteger("Speed", 0);
         VildracSpriteRenderer = Vildrac.GetComponent<SpriteRenderer>();
@@ -179,20 +186,39 @@ public class SceneOneManager : MonoBehaviour
         Alpha = 1;
     }
 
-    public IEnumerator countDownRoutine()
+    public IEnumerator countDownRoutine(int valueCountDown)
     {
-        while (countChoice > 0)
+        while (valueCountDown > 0)
         {
             yield return new WaitForSeconds(1);
-            countChoice--;
-            textCountDown.text = countChoice.ToString();
+            valueCountDown--;
+            textCountDown.text = valueCountDown.ToString();
         }
 
-        int randomChoice = Random.Range(1, 1000);
-        randomChoice = (randomChoice % 2) + 1;
-        SharedObjects.SetInt(CHOICEKEY, randomChoice);
-        SetChoice();
-        UnsetChoiceActive();
+        if (hasCoroutineCountStarted)
+        {
+            int randomChoice = Random.Range(1, 1000);
+            randomChoice = (randomChoice % 2) + 1;
+            SharedObjects.SetInt(CHOICEKEY, randomChoice);
+            SetChoice();
+            UnsetChoiceActive();
+        }
+        else
+        {
+            textCountDown.text = "";
+            ChoixText.gameObject.SetActive(false);
+            yield return new WaitForSeconds(2);
+            ChoixText.gameObject.SetActive(true);
+            Cursor.SetActive(true);
+            textCountDown.text = countChoice.ToString();
+            hasCoroutineCountStarted = true;
+            ChoixText.text = "Faites votre choix...";
+            StartCoroutine("countDownRoutine", countChoice);
+        }
+
+        
+
+
 
     }
 }
