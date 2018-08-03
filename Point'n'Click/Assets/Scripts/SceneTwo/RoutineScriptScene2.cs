@@ -71,6 +71,7 @@ public class RoutineScriptScene2 : MonoBehaviour
     TextMesh textMesh;
 
     private bool hasCoroutineCountStarted;
+    private bool startMooving = false;
 
     private void Awake()
     {
@@ -129,6 +130,18 @@ public class RoutineScriptScene2 : MonoBehaviour
                 }
             }
         }
+
+        if (startMooving)
+        {
+            Player_controller.startMovingLeft = true;
+            if(DummyVildracColereSpawn.position.x >= Vildrac.transform.position.x)
+            {
+                startMooving = false;
+                Player_controller.startMovingLeft = false;
+                Player_controller.isIddle = true;
+                VildracAnimator.SetBool("isLookingLeft", false);
+            }
+        }
     }
 
     public void InitPositions()
@@ -175,7 +188,18 @@ public class RoutineScriptScene2 : MonoBehaviour
 
     public void Step0()
     {
-        myDialogManager.EnableTextBoxWithNextStep();
+        if (!isColerique)
+        {
+            RonflementManager.Play();
+            myDialogManager.EnableTextBoxSTD(3f);
+            Invoke("NextStep", 3f * myDialogManager.textLines.Length);
+
+        }
+        else
+        {
+            myDialogManager.EnableTextBoxWithNextStep();
+        }
+       
     }
 
     public void Step1()
@@ -189,8 +213,9 @@ public class RoutineScriptScene2 : MonoBehaviour
         }
         else
         {
+           // RonflementManager.Stop();
             TocTocParticle = Instantiate(TocTocParticlePrefab, DummyParticlePosition.position, DummyParticlePosition.rotation);
-            Invoke("NextStep", 0.5f);
+            Invoke("NextStep",1f);
         }
 
     }
@@ -201,14 +226,23 @@ public class RoutineScriptScene2 : MonoBehaviour
         {
             myDialogManager.EnableTextBoxSTD(3f);
             TocTocParticle = Instantiate(TocTocParticlePrefab, DummyParticlePosition.position, DummyParticlePosition.rotation);
-            Invoke("NextStep", 6f);
+            Invoke("NextStep", 3 * myDialogManager.textLines.Length);
         }
         else
         {
-            myDialogManager.EnableTextBox();
-            Invoke("NextStep", myDialogManager.speedTextDefil * myDialogManager.textLines.Length);
+           
+            myDialogManager.EnableTextBoxSTD(5);
+            Invoke("Blurp", 5);
+           
         }
        
+    }
+
+    public void Blurp()
+    {
+        RonflementManager.Stop();
+        BlurpManager.Play();
+        Invoke("NextStep", 5);
     }
 
     public void Step3()
@@ -220,8 +254,9 @@ public class RoutineScriptScene2 : MonoBehaviour
         }
         else
         {
+            BackgroundMusicManager.Play();
             TocTocParticle = Instantiate(TocTocParticlePrefab, DummyParticlePosition.position, DummyParticlePosition.rotation);
-            Invoke("StepAlcolique", 0.5f);
+            Invoke("StepAlcolique", 1);
         }
         
     }
@@ -229,7 +264,8 @@ public class RoutineScriptScene2 : MonoBehaviour
     public void StepAlcolique()
     {
         VildracAnimator.SetBool("isSleeping", false);
-        myDialogManager.EnableTextBoxWithNextStep();
+        myDialogManager.EnableTextBoxSTD(5);
+        Invoke("NextStep", 3);
     }
 
     public void Step4()
@@ -243,7 +279,7 @@ public class RoutineScriptScene2 : MonoBehaviour
     }
 
     public void Step5()
-    {
+    {   
         if (!isColerique)
         {
             VildracAnimator.SetBool("isLookingLeft", true);
@@ -263,7 +299,8 @@ public class RoutineScriptScene2 : MonoBehaviour
 
     public void Step7()
     {
-        myDialogManager.EnableTextBoxWithNextStep();
+        myDialogManager.EnableTextBoxSTD(6);
+        Invoke("NextStep", myDialogManager.textLines.Length * + 6);
     }
 
     public void Step8()
@@ -287,24 +324,29 @@ public class RoutineScriptScene2 : MonoBehaviour
     {
         isChoice = false;
         soupconneText.SetActive(false);
+        choiceText.gameObject.SetActive(false);
+        textCountDown.gameObject.SetActive(false);
         Cursor.SetActive(false);
         Choices.SetActive(false);
+        MoveToDesk();
         StartStepAfterChoice();
+    }
+
+    public void MoveToDesk()
+    {
+        startMooving = true;   
     }
 
     public void Step9()
     {
-        Debug.Log(Choice);
         switch (Choice)
         {
             case 1:
                 myDialogManager.EnableTextBox();
-                Debug.Log(myDialogManager.textLines);
-                Invoke("NextStep", myDialogManager.speedTextDefil * myDialogManager.textLines.Length);
+                Invoke("NextStep", myDialogManager.speedTextDefil * 4);
                 break;
             case 2:
                 myDialogManager.EnableTextBox();
-                Debug.Log(myDialogManager.textLines);
                 Invoke("NextStep", myDialogManager.speedTextDefil * myDialogManager.textLines.Length);
                 break;
             default:
@@ -314,34 +356,43 @@ public class RoutineScriptScene2 : MonoBehaviour
 
     public void Step10()
     {
-        //Window = Instantiate(mapsPrefab, DummyWindowPosition.position, DummyWindowPosition.rotation);
-        //Window.GetComponent<Renderer>().sortingOrder = 25;
-        //Invoke("NextStep", 2f);
+        Window = Instantiate(mapsPrefab, DummyWindowPosition.position, DummyWindowPosition.rotation);
+        Window.GetComponent<Renderer>().sortingOrder = 25;
+        Invoke("NextStep", myDialogManager.speedTextDefil + 2f);
     }
 
     public void Step11()
     {
         if(Choice == 1)
         {
-            myDialogManager.EnableTextBoxWithNextStep();
+            myDialogManager.speedTextDefil = 5;
+            myDialogManager.EnableTextBox();
+
+          //  Invoke("NextStep", myDialogManager.textLines.Length * myDialogManager.speedTextDefil);
         }
         else
         {
-            myDialogManager.EnableTextBoxWithNextStep();
+            myDialogManager.speedTextDefil = 5;
+            myDialogManager.EnableTextBox();
+         //   Invoke("NextStep", myDialogManager.textLines.Length * myDialogManager.speedTextDefil);
         }
+
+        Invoke("test", myDialogManager.textLines.Length * myDialogManager.speedTextDefil);
     }
 
-    public void Step12()
-    {
-        myDialogManager.EnableTextBoxWithNextStep();
-    }
 
-    public void Step13()
-    {
-        Window = Instantiate(demineurPrefab, DummyWindowPosition.position, DummyWindowPosition.rotation);
-        Window.GetComponent<Renderer>().sortingOrder = 27;
-        myDialogManager.EnableTextBox();
+    //public void Step12()
+    //{
 
+    //  //  Window = Instantiate(demineurPrefab, DummyWindowPosition.position, DummyWindowPosition.rotation);
+    //    //Window.GetComponent<Renderer>().sortingOrder = 27;
+    //    myDialogManager.EnableTextBox();
+    //    Invoke("test", myDialogManager.textLines.Length * myDialogManager.speedTextDefil);
+    //}
+
+    public void test()
+    {
+        Debug.Log(Time.timeSinceLevelLoad);
     }
 
     public void StartStepAfterChoice()
@@ -403,12 +454,9 @@ public class RoutineScriptScene2 : MonoBehaviour
             case 11:
                 Step11();
                 break;
-            case 12:
-                Step12();
-                break;
-            case 13:
-                Step13();
-                break;
+            //case 12:
+            //    Step12();
+            //    break;
             default:
                 Step0();
                 break;
@@ -428,6 +476,7 @@ public class RoutineScriptScene2 : MonoBehaviour
 
     public IEnumerator countDownRoutine(int valueCountDown)
     {
+        textCountDown.text = valueCountDown.ToString();
         while (valueCountDown > 0)
         {
             yield return new WaitForSeconds(1);
@@ -448,7 +497,7 @@ public class RoutineScriptScene2 : MonoBehaviour
         {
             textCountDown.text = "";
             choiceText.text = "";
-            yield return new WaitForSeconds(2);
+            yield return new WaitForSeconds(0.5f);
             Cursor.SetActive(true);
             choiceText.text = "Faites votre choix...";
             textCountDown.text = choiceCountDown.ToString();
