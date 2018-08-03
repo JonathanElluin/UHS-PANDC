@@ -138,6 +138,15 @@ public class SceneOneManager : MonoBehaviour
         }
     }
 
+
+
+
+
+
+
+
+
+
     public void SetChoice()
     {
         switch (SharedObjects.GetInt(CHOICEKEY))

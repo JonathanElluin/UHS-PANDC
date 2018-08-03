@@ -1,4 +1,7 @@
-﻿using System.Collections;
+﻿using SimpleFirebaseUnity;
+using SimpleFirebaseUnity.MiniJSON;
+using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -6,7 +9,9 @@ public class ChoicesManagerScene2 : MonoBehaviour {
 
     private SpriteRenderer spriteRenderer;
     private Color spriteColor;
-    public static int Choice;
+    public static int Choice = 1;
+
+
 
     private void Start()
     {
@@ -47,6 +52,6 @@ public class ChoicesManagerScene2 : MonoBehaviour {
         spriteRenderer.color = new Color(spriteRenderer.color.r, spriteRenderer.color.g, spriteRenderer.color.b, 1);
     }
 
+  
 
-	
 }

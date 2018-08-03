@@ -1,4 +1,7 @@
-﻿using System.Collections;
+﻿using SimpleFirebaseUnity;
+using SimpleFirebaseUnity.MiniJSON;
+using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Threading;
 using UnityEngine;
@@ -27,6 +30,10 @@ public class RoutineScriptScene2 : MonoBehaviour
     public Transform DummyWomanStopPosition;
     public GameObject WindowPrefab;
     public GameObject soupconneText;
+    public Text textCountDown;
+    public Text choiceText;
+    public int reflexionCountDown;
+    public int choiceCountDown;
 
     public GameObject mapsPrefab;
     public GameObject demineurPrefab;
@@ -52,6 +59,51 @@ public class RoutineScriptScene2 : MonoBehaviour
 
     // Use this for initialization
 
+    static int debug_idx = 0;
+
+    private Firebase firebase;
+    Firebase lastUpdate;
+    Firebase value;
+    private String currentValue;
+    private string valeur = "";
+
+    [SerializeField]
+    TextMesh textMesh;
+
+    private bool hasCoroutineCountStarted;
+
+    private void Awake()
+    {
+        firebase = Firebase.CreateNew("https://uhs-api-v2.firebaseio.com/Lyon/", "hTdDHZdWprOR0MyMuPa1ikI2QG3jUF4yNqdC63M9");
+        // Init callbacks
+        firebase.OnGetSuccess += GetOKHandler;
+        firebase.OnGetFailed += GetFailHandler;
+
+        // un obeserveur sur la date
+        lastUpdate = firebase.Child("bouton/date");
+        //un observer sur la touche
+        value = firebase.Child("bouton/value");
+        /*--------------------------------------------------------------*/
+        // observer sur "last update" time stamp
+        FirebaseObserver observerButton = new FirebaseObserver(value, 0.0001f);
+        observerButton.OnChange += (Firebase sender, DataSnapshot snapshot) =>
+        {
+            valeur = snapshot.Value<string>();
+            DebugLog(valeur);
+        };
+        observerButton.Start();
+        /*--------------------------------------------------------------*/
+        // observer sur "last update" time stamp
+        FirebaseObserver observerTime = new FirebaseObserver(lastUpdate, 0.0001f);
+        observerTime.OnChange += (Firebase sender, DataSnapshot snapshot) =>
+        {
+            //OnKeydown();
+            currentValue = valeur;
+        };
+        observerTime.Start();
+    }
+
+
     void Start()
     {
         BureauAnimator = Background.GetComponent<Animator>();
@@ -69,7 +121,7 @@ public class RoutineScriptScene2 : MonoBehaviour
     {
         if(isChoice)
         {
-            if(Input.GetKeyDown(KeyCode.Space)){
+            if(valeur.Equals("action")){
                 if (ChoicesManagerScene2.Choice != 0)
                 {
                     Choice = ChoicesManagerScene2.Choice;
@@ -223,8 +275,12 @@ public class RoutineScriptScene2 : MonoBehaviour
     {
         isChoice = true;
         soupconneText.SetActive(true);
-        Cursor.SetActive(true);
+        choiceText.gameObject.SetActive(true);
+        textCountDown.gameObject.SetActive(true);
+
         Choices.SetActive(true);
+
+        StartCoroutine("countDownRoutine", reflexionCountDown);
     }
 
     public void DeleteChoices()
@@ -238,16 +294,18 @@ public class RoutineScriptScene2 : MonoBehaviour
 
     public void Step9()
     {
+        Debug.Log(Choice);
         switch (Choice)
         {
             case 1:
                 myDialogManager.EnableTextBox();
-                Invoke("NextStep", 5f);
-
+                Debug.Log(myDialogManager.textLines);
+                Invoke("NextStep", myDialogManager.speedTextDefil * myDialogManager.textLines.Length);
                 break;
             case 2:
                 myDialogManager.EnableTextBox();
-                Invoke("NextStep",5f);
+                Debug.Log(myDialogManager.textLines);
+                Invoke("NextStep", myDialogManager.speedTextDefil * myDialogManager.textLines.Length);
                 break;
             default:
                 break;
@@ -256,9 +314,9 @@ public class RoutineScriptScene2 : MonoBehaviour
 
     public void Step10()
     {
-        Window = Instantiate(mapsPrefab, DummyWindowPosition.position, DummyWindowPosition.rotation);
-        Window.GetComponent<Renderer>().sortingOrder = 25;
-        Invoke("NextStep", 2f);
+        //Window = Instantiate(mapsPrefab, DummyWindowPosition.position, DummyWindowPosition.rotation);
+        //Window.GetComponent<Renderer>().sortingOrder = 25;
+        //Invoke("NextStep", 2f);
     }
 
     public void Step11()
@@ -283,6 +341,7 @@ public class RoutineScriptScene2 : MonoBehaviour
         Window = Instantiate(demineurPrefab, DummyWindowPosition.position, DummyWindowPosition.rotation);
         Window.GetComponent<Renderer>().sortingOrder = 27;
         myDialogManager.EnableTextBox();
+
     }
 
     public void StartStepAfterChoice()
@@ -308,6 +367,7 @@ public class RoutineScriptScene2 : MonoBehaviour
 
     public void PlayStep(int step)
     {
+        Debug.Log(step);
         switch (step)
         {
             case 1:
@@ -364,6 +424,175 @@ public class RoutineScriptScene2 : MonoBehaviour
             yield return new WaitForSeconds(0.1f);
         }
         yield return null;
+    }
+
+    public IEnumerator countDownRoutine(int valueCountDown)
+    {
+        while (valueCountDown > 0)
+        {
+            yield return new WaitForSeconds(1);
+            valueCountDown--;
+            textCountDown.text = valueCountDown.ToString();
+        }
+
+        if (hasCoroutineCountStarted)
+        {
+            if(Choice == 0)
+            {
+                Choice = 1;
+            }
+            Cursor.SetActive(false);
+            DeleteChoices();
+        }
+        else
+        {
+            textCountDown.text = "";
+            choiceText.text = "";
+            yield return new WaitForSeconds(2);
+            Cursor.SetActive(true);
+            choiceText.text = "Faites votre choix...";
+            textCountDown.text = choiceCountDown.ToString();
+            hasCoroutineCountStarted = true;
+            StartCoroutine("countDownRoutine", choiceCountDown);
+        }
+    }
+
+    void GetOKHandler(Firebase sender, DataSnapshot snapshot)
+    {
+        DebugLog("[OK] Get from key: <" + sender.FullKey + ">");
+        DebugLog("[OK] Raw Json: " + snapshot.RawJson);
+
+        Dictionary<string, object> dict = snapshot.Value<Dictionary<string, object>>();
+        List<string> keys = snapshot.Keys;
+
+        if (keys != null)
+            foreach (string key in keys)
+            {
+                DebugLog(key + " = " + dict[key].ToString());
+            }
+    }
+
+    void GetFailHandler(Firebase sender, FirebaseError err)
+    {
+        DebugError("[ERR] Get from key: <" + sender.FullKey + ">,  " + err.Message + " (" + (int)err.Status + ")");
+    }
+
+    void SetOKHandler(Firebase sender, DataSnapshot snapshot)
+    {
+        DebugLog("[OK] Set from key: <" + sender.FullKey + ">");
+    }
+
+    void SetFailHandler(Firebase sender, FirebaseError err)
+    {
+        DebugError("[ERR] Set from key: <" + sender.FullKey + ">, " + err.Message + " (" + (int)err.Status + ")");
+    }
+
+    void UpdateOKHandler(Firebase sender, DataSnapshot snapshot)
+    {
+        DebugLog("[OK] Update from key: <" + sender.FullKey + ">");
+    }
+
+    void UpdateFailHandler(Firebase sender, FirebaseError err)
+    {
+        DebugError("[ERR] Update from key: <" + sender.FullKey + ">, " + err.Message + " (" + (int)err.Status + ")");
+    }
+
+    void DelOKHandler(Firebase sender, DataSnapshot snapshot)
+    {
+        DebugLog("[OK] Del from key: <" + sender.FullKey + ">");
+    }
+
+    void DelFailHandler(Firebase sender, FirebaseError err)
+    {
+        DebugError("[ERR] Del from key: <" + sender.FullKey + ">, " + err.Message + " (" + (int)err.Status + ")");
+    }
+
+    void PushOKHandler(Firebase sender, DataSnapshot snapshot)
+    {
+        DebugLog("[OK] Push from key: <" + sender.FullKey + ">");
+    }
+
+    void PushFailHandler(Firebase sender, FirebaseError err)
+    {
+        DebugError("[ERR] Push from key: <" + sender.FullKey + ">, " + err.Message + " (" + (int)err.Status + ")");
+    }
+
+    void GetRulesOKHandler(Firebase sender, DataSnapshot snapshot)
+    {
+        DebugLog("[OK] GetRules");
+        DebugLog("[OK] Raw Json: " + snapshot.RawJson);
+    }
+
+    void GetRulesFailHandler(Firebase sender, FirebaseError err)
+    {
+        DebugError("[ERR] GetRules,  " + err.Message + " (" + (int)err.Status + ")");
+    }
+
+    void GetTimeStamp(Firebase sender, DataSnapshot snapshot)
+    {
+        long timeStamp = snapshot.Value<long>();
+        DateTime dateTime = Firebase.TimeStampToDateTime(timeStamp);
+
+        DebugLog("[OK] Get on timestamp key: <" + sender.FullKey + ">");
+        DebugLog("Date: " + timeStamp + " --> " + dateTime.ToString());
+    }
+
+    void DebugLog(string str)
+    {
+        Debug.Log(str);
+        if (textMesh != null)
+        {
+            textMesh.text += (++debug_idx + ". " + str) + "\n";
+        }
+    }
+
+    void DebugWarning(string str)
+    {
+        Debug.LogWarning(str);
+        if (textMesh != null)
+        {
+            textMesh.text += (++debug_idx + ". " + str) + "\n";
+        }
+    }
+
+    void DebugError(string str)
+    {
+        Debug.LogError(str);
+        if (textMesh != null)
+        {
+            textMesh.text += (++debug_idx + ". " + str) + "\n";
+        }
+    }
+
+    Dictionary<string, object> GetSampleScoreBoard()
+    {
+        Dictionary<string, object> scoreBoard = new Dictionary<string, object>();
+        Dictionary<string, object> scores = new Dictionary<string, object>();
+        Dictionary<string, object> p1 = new Dictionary<string, object>();
+        Dictionary<string, object> p2 = new Dictionary<string, object>();
+        Dictionary<string, object> p3 = new Dictionary<string, object>();
+
+        p1.Add("name", "simple");
+        p1.Add("score", 80);
+
+        p2.Add("name", "firebase");
+        p2.Add("score", 100);
+
+        p3.Add("name", "csharp");
+        p3.Add("score", 60);
+
+        scores.Add("p1", p1);
+        scores.Add("p2", p2);
+        scores.Add("p3", p3);
+
+        scoreBoard.Add("scores", scores);
+
+        scoreBoard.Add("layout", Json.Deserialize("{\"x\": 0, \"y\":10}") as Dictionary<string, object>);
+        scoreBoard.Add("resizable", true);
+
+        scoreBoard.Add("temporary", "will be deleted later");
+
+        return scoreBoard;
     }
 
 }
