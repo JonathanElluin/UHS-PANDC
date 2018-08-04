@@ -41,18 +41,9 @@ public class MoveScript : MonoBehaviour
         observerButton.OnChange += (Firebase sender, DataSnapshot snapshot) =>
         {
             valeur = snapshot.Value<string>();
-            DebugLog(valeur);
-        };
-        observerButton.Start();
-        /*--------------------------------------------------------------*/
-        // observer sur "last update" time stamp
-        FirebaseObserver observerTime = new FirebaseObserver(lastUpdate, 0.0001f);
-        observerTime.OnChange += (Firebase sender, DataSnapshot snapshot) =>
-        {
-            //OnKeydown();
             currentValue = valeur;
         };
-        observerTime.Start();
+        observerButton.Start();
     }
 
     // Use this for initialization
@@ -66,10 +57,11 @@ public class MoveScript : MonoBehaviour
     {
         //StartCoroutine(Tests());
         // un obeserveur sur la date
-        lastUpdate = firebase.Child("bouton/date");
+       // lastUpdate = firebase.Child("bouton/date");
         //un observer sur la touche
         value = firebase.Child("bouton/value");
-
+       
+        
         if (currentValue == "droite" && transform.position.x < MaxRight.position.x) //droite
         {
             transform.Translate(Vector2.right * Speed * Time.deltaTime);
@@ -215,7 +207,7 @@ public class MoveScript : MonoBehaviour
 
     void DebugLog(string str)
     {
-        Debug.Log(str);
+       // Debug.Log(str);
         if (textMesh != null)
         {
             textMesh.text += (++debug_idx + ". " + str) + "\n";

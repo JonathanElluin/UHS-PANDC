@@ -1764,7 +1764,6 @@ GameObject:
   - component: {fileID: 1160714353}
   - component: {fileID: 1160714351}
   - component: {fileID: 1160714352}
-  - component: {fileID: 1160714350}
   m_Layer: 0
   m_Name: Choix1
   m_TagString: Choix1
@@ -1785,20 +1784,6 @@ Transform:
   m_Father: {fileID: 730913979}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1160714350
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1160714348}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 51619acb86e81bb43b6892195a149c12, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  sprite: {fileID: 0}
-  collision: {fileID: 0}
-  textMesh: {fileID: 0}
 --- !u!61 &1160714351
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -2443,7 +2428,6 @@ GameObject:
   - component: {fileID: 1589462610}
   - component: {fileID: 1589462608}
   - component: {fileID: 1589462609}
-  - component: {fileID: 1589462607}
   m_Layer: 0
   m_Name: Choix3
   m_TagString: Choix2
@@ -2464,20 +2448,6 @@ Transform:
   m_Father: {fileID: 730913979}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1589462607
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1589462605}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 51619acb86e81bb43b6892195a149c12, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  sprite: {fileID: 0}
-  collision: {fileID: 0}
-  textMesh: {fileID: 0}
 --- !u!61 &1589462608
 BoxCollider2D:
   m_ObjectHideFlags: 0

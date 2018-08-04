@@ -10,12 +10,7 @@ public class Loader : MonoBehaviour {
 
         //PlayerPrefs.DeleteAll();
        int scene = PlayerPrefs.GetInt("SceneToLoad",1);
-        Debug.Log("choix dans le loader:"+PlayerPrefs.GetInt("ChoiceScene1", 1));
-        if(scene != 1)
-        {
-            SceneManager.LoadScene(scene);
-            PlayerPrefs.DeleteKey("SceneToLoad");
-        }
+        SceneManager.LoadScene('2');
         
     }
 }

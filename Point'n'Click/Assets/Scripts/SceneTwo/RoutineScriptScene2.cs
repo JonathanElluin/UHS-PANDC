@@ -86,11 +86,10 @@ public class RoutineScriptScene2 : MonoBehaviour
         value = firebase.Child("bouton/value");
         /*--------------------------------------------------------------*/
         // observer sur "last update" time stamp
-        FirebaseObserver observerButton = new FirebaseObserver(value, 0.0001f);
+        FirebaseObserver observerButton = new FirebaseObserver(value, 0.1f);
         observerButton.OnChange += (Firebase sender, DataSnapshot snapshot) =>
         {
             valeur = snapshot.Value<string>();
-            DebugLog(valeur);
         };
         observerButton.Start();
         /*--------------------------------------------------------------*/
@@ -160,7 +159,6 @@ public class RoutineScriptScene2 : MonoBehaviour
     public void InitSprites()
     {
         windowSpriteRenderer = WindowPrefab.GetComponent<SpriteRenderer>();
-        Debug.Log("choix de scene = "+PlayerPrefs.GetInt("ChoiceScene1", 0));
         //choix 0 Alcoolique
         //choix 1 colerique
         switch (PlayerPrefs.GetInt("ChoiceScene1", 1))
@@ -197,7 +195,9 @@ public class RoutineScriptScene2 : MonoBehaviour
         }
         else
         {
-            myDialogManager.EnableTextBoxWithNextStep();
+            BackgroundMusicManager.Play();
+            myDialogManager.EnableTextBoxSTD(4f);
+            Invoke("NextStep", myDialogManager.textLines.Length * 4f);
         }
        
     }
@@ -226,14 +226,13 @@ public class RoutineScriptScene2 : MonoBehaviour
         {
             myDialogManager.EnableTextBoxSTD(3f);
             TocTocParticle = Instantiate(TocTocParticlePrefab, DummyParticlePosition.position, DummyParticlePosition.rotation);
-            Invoke("NextStep", 3 * myDialogManager.textLines.Length);
+            Invoke("NextStep", 3f * myDialogManager.textLines.Length);
         }
         else
         {
            
             myDialogManager.EnableTextBoxSTD(5);
-            Invoke("Blurp", 5);
-           
+            Invoke("Blurp", 5f);
         }
        
     }
@@ -254,18 +253,18 @@ public class RoutineScriptScene2 : MonoBehaviour
         }
         else
         {
-            BackgroundMusicManager.Play();
             TocTocParticle = Instantiate(TocTocParticlePrefab, DummyParticlePosition.position, DummyParticlePosition.rotation);
-            Invoke("StepAlcolique", 1);
+            Invoke("StepAlcolique", 1f);
         }
         
     }
 
     public void StepAlcolique()
     {
+        BackgroundMusicManager.Play();
         VildracAnimator.SetBool("isSleeping", false);
         myDialogManager.EnableTextBoxSTD(5);
-        Invoke("NextStep", 3);
+        Invoke("NextStep", 3f);
     }
 
     public void Step4()
@@ -300,7 +299,7 @@ public class RoutineScriptScene2 : MonoBehaviour
     public void Step7()
     {
         myDialogManager.EnableTextBoxSTD(6);
-        Invoke("NextStep", myDialogManager.textLines.Length * + 6);
+        Invoke("NextStep", myDialogManager.textLines.Length * 6f);
     }
 
     public void Step8()
@@ -329,75 +328,7 @@ public class RoutineScriptScene2 : MonoBehaviour
         Cursor.SetActive(false);
         Choices.SetActive(false);
         MoveToDesk();
-        StartStepAfterChoice();
-    }
-
-    public void MoveToDesk()
-    {
-        startMooving = true;   
-    }
-
-    public void Step9()
-    {
-        switch (Choice)
-        {
-            case 1:
-                myDialogManager.EnableTextBox();
-                Invoke("NextStep", myDialogManager.speedTextDefil * 4);
-                break;
-            case 2:
-                myDialogManager.EnableTextBox();
-                Invoke("NextStep", myDialogManager.speedTextDefil * myDialogManager.textLines.Length);
-                break;
-            default:
-                break;
-        }
-    }
-
-    public void Step10()
-    {
-        Window = Instantiate(mapsPrefab, DummyWindowPosition.position, DummyWindowPosition.rotation);
-        Window.GetComponent<Renderer>().sortingOrder = 25;
-        Invoke("NextStep", myDialogManager.speedTextDefil + 2f);
-    }
-
-    public void Step11()
-    {
-        if(Choice == 1)
-        {
-            myDialogManager.speedTextDefil = 5;
-            myDialogManager.EnableTextBox();
-
-          //  Invoke("NextStep", myDialogManager.textLines.Length * myDialogManager.speedTextDefil);
-        }
-        else
-        {
-            myDialogManager.speedTextDefil = 5;
-            myDialogManager.EnableTextBox();
-         //   Invoke("NextStep", myDialogManager.textLines.Length * myDialogManager.speedTextDefil);
-        }
-
-        Invoke("test", myDialogManager.textLines.Length * myDialogManager.speedTextDefil);
-    }
-
-
-    //public void Step12()
-    //{
-
-    //  //  Window = Instantiate(demineurPrefab, DummyWindowPosition.position, DummyWindowPosition.rotation);
-    //    //Window.GetComponent<Renderer>().sortingOrder = 27;
-    //    myDialogManager.EnableTextBox();
-    //    Invoke("test", myDialogManager.textLines.Length * myDialogManager.speedTextDefil);
-    //}
-
-    public void test()
-    {
-        Debug.Log(Time.timeSinceLevelLoad);
-    }
-
-    public void StartStepAfterChoice()
-    {
-        if(Choice == 1)
+        if (Choice == 1)
         {
             myDialogManager.isChoice1_2 = true;
             myDialogManager.AddChoicesText();
@@ -407,7 +338,68 @@ public class RoutineScriptScene2 : MonoBehaviour
             myDialogManager.isChoice1_2 = false;
             myDialogManager.AddChoicesText();
         }
+
         NextStep();
+    }
+
+    public void MoveToDesk()
+    {
+        startMooving = true;   
+    }
+
+    public void Step9()
+    {
+        if(Choice == 1)
+        {
+            myDialogManager.EnableTextBox();
+            Invoke("NextStep", myDialogManager.speedTextDefil * myDialogManager.speedTextDefil);
+        }
+        else
+        {
+            myDialogManager.EnableTextBox();
+            currentStep++;
+
+            Invoke("NextStep", myDialogManager.textLines.Length * myDialogManager.speedTextDefil);
+        }
+    }
+
+    public void Step10()
+    {
+        if (Choice == 1)
+        {
+            Window = Instantiate(mapsPrefab, DummyWindowPosition.position, DummyWindowPosition.rotation);
+            Window.GetComponent<Renderer>().sortingOrder = 25;
+            Invoke("NextStep", myDialogManager.speedTextDefil + 2f);
+        }
+ 
+    }
+
+    public void Step11()
+    {
+        Debug.Log("Step 11 " + Time.timeSinceLevelLoad);
+        if (Choice == 1)
+        {
+
+            myDialogManager.speedTextDefil = 5;
+            myDialogManager.EnableTextBox();
+
+          //  Invoke("NextStep", myDialogManager.textLines.Length * myDialogManager.speedTextDefil);
+        }
+        else
+        {
+            Window = Instantiate(mapsPrefab, DummyWindowPosition.position, DummyWindowPosition.rotation);
+            Window.GetComponent<Renderer>().sortingOrder = 25;
+            myDialogManager.speedTextDefil = 5;
+            myDialogManager.EnableTextBox();
+         //   Invoke("NextStep", myDialogManager.textLines.Length * myDialogManager.speedTextDefil);
+        }
+
+        Invoke("test", myDialogManager.textLines.Length * myDialogManager.speedTextDefil);
+    }
+
+    public void test()
+    {
+        Debug.Log(Time.timeSinceLevelLoad);
     }
 
     public void NextStep()
@@ -454,9 +446,6 @@ public class RoutineScriptScene2 : MonoBehaviour
             case 11:
                 Step11();
                 break;
-            //case 12:
-            //    Step12();
-            //    break;
             default:
                 Step0();
                 break;
@@ -588,6 +577,7 @@ public class RoutineScriptScene2 : MonoBehaviour
 
     void DebugLog(string str)
     {
+
         Debug.Log(str);
         if (textMesh != null)
         {

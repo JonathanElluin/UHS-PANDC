@@ -23,7 +23,6 @@ public class TextBoxManager : MonoBehaviour
 
     private int currentLine = 0;
     private int endAtLine = 0;
-    private bool isWithNextStep;
 
     public PlayerController player;
 
@@ -138,7 +137,6 @@ public class TextBoxManager : MonoBehaviour
             isActivated = true;
             StartCoroutine("TextCoroutine");
             textBox.SetActive(true);
-            isWithNextStep = false;
         }
 
     }
@@ -150,7 +148,6 @@ public class TextBoxManager : MonoBehaviour
             isActivated = true;
             StartCoroutine("TextCorutineWithSpeedTextDefil", std);
             textBox.SetActive(true);
-            isWithNextStep = false;
         }
 
     }
@@ -162,7 +159,6 @@ public class TextBoxManager : MonoBehaviour
             isActivated = true;
             StartCoroutine("TextCoroutine");
             textBox.SetActive(true);
-            isWithNextStep = true;
         }
     }
 
@@ -172,10 +168,6 @@ public class TextBoxManager : MonoBehaviour
         StopCoroutine("TextCorutineWithSpeedTextDefil");
         isActivated = false;
         textBox.SetActive(false);
-        if (isWithNextStep)
-        {
-            manager.NextStep();
-        }         
     }
 
     public static TextBoxManager getInstance()
